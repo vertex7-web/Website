@@ -6,14 +6,17 @@ import './AboutPreview.css';
 
 export default function AboutPreview() {
   return (
-    <section className="about-preview" id="about-preview">
+    <section className="about-preview" 
+             id="about-preview"
+             style={{ backgroundImage: `url(${aboutImg})` }} >
+      <div className="about-preview__overlay" aria-hidden="true" />
       <Container className="about-preview__grid">
         {/* Text Column */}
         <div className="about-preview__text">
           <SectionHeading
             eyebrow="Who We Are"
             title="Engineered to Support Uncompromising Demands"
-            light
+            
           />
           <p className="about-preview__body">
             {/* CLIENT TO PROVIDE — company overview copy */}
@@ -30,18 +33,6 @@ export default function AboutPreview() {
           <Button to="/about" variant="ghost" size="md" className="about-preview__cta">
             Learn More About Us →
           </Button>
-        </div>
-
-        {/* Image Column */}
-        <div className="about-preview__image-wrap">
-          <img
-            src={aboutImg}
-            alt="Construction team reviewing blueprints with heavy equipment in background"
-            className="about-preview__image"
-            loading="lazy"
-          />
-          {/* Accent corner decoration */}
-          <div className="about-preview__accent" aria-hidden="true" />
         </div>
       </Container>
     </section>
