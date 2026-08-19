@@ -15,12 +15,10 @@
 .about-preview__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    100deg,
-    rgba(2, 8, 0, 0.82) 0%,
-    rgba(27, 56, 33, 0.55) 50%,
-    rgba(27, 56, 33, 0.30) 100%
-  );
+  background: linear-gradient(100deg,
+      rgba(2, 8, 0, 0.82) 20%,
+      rgba(0, 22, 5, 0.55) 70%,
+      rgba(0, 70, 14, 0.3) 100%);
   z-index: 1;
 }
 
@@ -53,7 +51,7 @@
 }
 
 .about-preview__cta.btn--ghost {
-  color: var(--color-off-white);
+  color: var(--color-muted-dark);
   font-weight: 700;
 }
 

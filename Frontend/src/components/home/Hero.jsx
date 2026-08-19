@@ -1,15 +1,20 @@
 import Container from '../ui/Container';
 import Button from '../ui/Button';
-import heroBg from '../../assets/hero-bg.jpg';
+import heroVid from '../../assets/hero-vid.mp4';
 import './Hero.css';
 
 export default function Hero() {
   return (
-    <section
-      className="hero"
-      id="hero"
-      style={{ backgroundImage: `url(${heroBg})` }}
-    >
+    <section className="hero" id="hero">
+      <video
+        className="hero__video"
+        src={heroVid}
+        autoPlay
+        loop
+        muted
+        playsInline
+        aria-hidden="true"
+      />
       <div className="hero__overlay" aria-hidden="true" />
       <Container className="hero__content">
         <span className="hero__eyebrow">
