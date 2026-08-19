@@ -125,6 +125,12 @@
   .machines-preview__grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .machines-preview__grid>.machine-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    margin-inline: auto;
+  }
 }
 
 @media (max-width: 600px) {
