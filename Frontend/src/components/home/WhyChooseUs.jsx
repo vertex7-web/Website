@@ -26,17 +26,13 @@ const POINTS = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="why-choose" id="why-choose-us">
+    <section className="why-choose" id="why-choose-us"
+    style={{ backgroundImage: `url(${whyImg})` }}
+    >
+      <div className="why-choose__overlay" aria-hidden="true" />
       <Container className="why-choose__grid">
         {/* Image Column */}
-        <div className="why-choose__image-wrap">
-          <img
-            src={whyImg}
-            alt="Heavy wheel loader operating on construction site"
-            className="why-choose__image"
-            loading="lazy"
-          />
-        </div>
+        
 
         {/* Content Column */}
         <div className="why-choose__content">
