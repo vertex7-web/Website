@@ -1,0 +1,80 @@
+/* ── Final CTA ───────────────────────────────────────────── */
+
+.final-cta {
+  background-color: var(--color-black);
+  padding: var(--section-pad-y) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle lime accent glow */
+.final-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-lime) 50%,
+    transparent 100%
+  );
+}
+
+.final-cta__content {
+  text-align: center;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.final-cta__eyebrow {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-lime);
+  margin-bottom: var(--space-md);
+}
+
+.final-cta__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-5xl);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.05;
+  color: var(--color-white);
+  margin-bottom: var(--space-lg);
+}
+
+.final-cta__description {
+  color: var(--color-muted);
+  font-size: var(--text-md);
+  line-height: 1.65;
+  margin-bottom: var(--space-2xl);
+}
+
+.final-cta__actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .final-cta__title {
+    font-size: var(--text-3xl);
+  }
+
+  .final-cta__actions {
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -1,0 +1,134 @@
+/* ── Machines Preview ─────────────────────────────────────── */
+
+.machines-preview {
+  background-color: var(--color-black);
+  padding: var(--section-pad-y) 0;
+}
+
+.machines-preview__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.machines-preview__footer {
+  text-align: center;
+  margin-top: var(--space-2xl);
+}
+
+/* ── Machine Card ────────────────────────────────────────── */
+
+.machine-card {
+  background-color: var(--color-charcoal);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+
+.machine-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Image */
+.machine-card__image-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.machine-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.machine-card:hover .machine-card__image {
+  transform: scale(1.05);
+}
+
+.machine-card__badge {
+  position: absolute;
+  top: var(--space-md);
+  left: var(--space-md);
+  background-color: var(--color-lime);
+  color: var(--color-black);
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+/* Body */
+.machine-card__body {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.machine-card__brand {
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.machine-card__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-white);
+  line-height: 1.2;
+  margin-bottom: var(--space-sm);
+}
+
+.machine-card__description {
+  color: var(--color-muted);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  flex-grow: 1;
+  margin-bottom: var(--space-md);
+}
+
+.machine-card__link {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-lime);
+  transition: color var(--transition-fast);
+}
+
+.machine-card:hover .machine-card__link {
+  color: var(--color-lime-hover);
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .machines-preview__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .machines-preview__grid {
+    grid-template-columns: 1fr;
+  }
+}

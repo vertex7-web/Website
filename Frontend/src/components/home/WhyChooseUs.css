@@ -1,0 +1,110 @@
+/* ── Why Choose Us ────────────────────────────────────────── */
+
+.why-choose {
+  background-color: var(--color-charcoal);
+  padding: var(--section-pad-y) 0;
+}
+
+.why-choose__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: center;
+}
+
+/* Image */
+.why-choose__image-wrap {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.why-choose__image {
+  width: 100%;
+  height: 560px;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-md);
+}
+
+/* Content */
+.why-choose__eyebrow {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-lime);
+  margin-bottom: var(--space-md);
+}
+
+.why-choose__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--color-white);
+  margin-bottom: var(--space-2xl);
+}
+
+/* Points List */
+.why-choose__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.why-choose__item {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+
+.why-choose__bullet {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-lime);
+  border-radius: 2px;
+  margin-top: 5px;
+}
+
+.why-choose__item-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-white);
+  margin-bottom: var(--space-xs);
+  line-height: 1.2;
+}
+
+.why-choose__item-description {
+  color: var(--color-muted);
+  font-size: var(--text-base);
+  line-height: 1.6;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .why-choose__image {
+    height: 450px;
+  }
+
+  .why-choose__title {
+    font-size: var(--text-3xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .why-choose__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .why-choose__image {
+    height: 320px;
+  }
+}
