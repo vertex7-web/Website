@@ -1,0 +1,170 @@
+/* ── Machines Catalog Page ────────────────────────────────── */
+
+.machines-page {
+  background-color: var(--color-black);
+  padding: var(--section-pad-y) 0;
+}
+
+/* Filters */
+.machines-page__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-2xl);
+}
+
+.machines-page__filter-btn {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-charcoal);
+  color: var(--color-muted);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.machines-page__filter-btn:hover {
+  color: var(--color-white);
+  border-color: var(--color-lime);
+}
+
+.machines-page__filter-btn--active {
+  background-color: var(--color-lime);
+  color: var(--color-black);
+  border-color: var(--color-lime);
+}
+
+/* Grid */
+.machines-page__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+/* Card */
+.machines-page__card {
+  background-color: var(--color-charcoal);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+
+.machines-page__card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.machines-page__card-image-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.machines-page__card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.machines-page__card:hover .machines-page__card-image {
+  transform: scale(1.05);
+}
+
+.machines-page__card-badge {
+  position: absolute;
+  top: var(--space-md);
+  left: var(--space-md);
+  background-color: var(--color-lime);
+  color: var(--color-black);
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+.machines-page__card-body {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.machines-page__card-brand {
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.machines-page__card-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-white);
+  line-height: 1.2;
+  margin-bottom: var(--space-sm);
+}
+
+.machines-page__card-desc {
+  color: var(--color-muted);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  flex-grow: 1;
+  margin-bottom: var(--space-md);
+}
+
+.machines-page__card-link {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-lime);
+  transition: color var(--transition-fast);
+}
+
+.machines-page__card:hover .machines-page__card-link {
+  color: var(--color-lime-hover);
+}
+
+.machines-page__empty {
+  text-align: center;
+  color: var(--color-muted);
+  padding: var(--space-3xl) 0;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .machines-page__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .machines-page__grid {
+    grid-template-columns: 1fr;
+  }
+}

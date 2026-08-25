@@ -1,0 +1,148 @@
+/* ── Quote Page ──────────────────────────────────────────── */
+
+.quote-page {
+  background-color: var(--color-black);
+  padding: var(--section-pad-y) 0;
+}
+
+.quote-page__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-3xl);
+  align-items: start;
+}
+
+.quote-page__section-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-white);
+  margin-bottom: var(--space-sm);
+}
+
+.quote-page__intro {
+  color: var(--color-muted);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  margin-bottom: var(--space-2xl);
+}
+
+/* Sidebar */
+.quote-page__sidebar {
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-lg));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.quote-page__sidebar-card {
+  background-color: var(--color-charcoal);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+}
+
+.quote-page__sidebar-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-white);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.quote-page__sidebar-text {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+
+.quote-page__sidebar-contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.quote-page__sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  color: var(--color-lime);
+}
+
+.quote-page__sidebar-item svg {
+  flex-shrink: 0;
+}
+
+.quote-page__sidebar-link {
+  color: var(--color-white);
+  font-size: var(--text-sm);
+  transition: color var(--transition-fast);
+}
+
+.quote-page__sidebar-link:hover {
+  color: var(--color-lime);
+}
+
+/* Steps */
+.quote-page__steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  counter-reset: none;
+}
+
+.quote-page__step {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+
+.quote-page__step-num {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-lime);
+  color: var(--color-black);
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.quote-page__step strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-white);
+  margin-bottom: 2px;
+}
+
+.quote-page__step p {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .quote-page__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .quote-page__sidebar {
+    position: static;
+  }
+}

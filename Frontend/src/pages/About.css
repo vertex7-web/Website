@@ -1,0 +1,245 @@
+/* ── About Page ──────────────────────────────────────────── */
+
+/* Company Story */
+.about-story {
+  background-color: var(--color-black);
+  padding: var(--section-pad-y) 0;
+}
+
+.about-story__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: center;
+}
+
+.about-story__text {
+  color: var(--color-muted);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+  max-width: 540px;
+}
+
+.about-story__image-wrap {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.about-story__image {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+/* Vision & Mission */
+.about-vm {
+  background-color: var(--color-charcoal);
+  padding: var(--section-pad-y) 0;
+}
+
+.about-vm__grid {
+  display: flex;
+  gap: var(--space-3xl);
+  align-items: stretch;
+}
+
+.about-vm__card {
+  flex: 1;
+}
+
+.about-vm__divider {
+  width: 2px;
+  background-color: var(--color-lime);
+  flex-shrink: 0;
+}
+
+.about-vm__label {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-lime);
+  margin-bottom: var(--space-md);
+}
+
+.about-vm__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--color-white);
+  margin-bottom: var(--space-md);
+}
+
+.about-vm__text {
+  color: var(--color-muted);
+  font-size: var(--text-base);
+  line-height: 1.7;
+}
+
+.about-vm__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-xs);
+}
+
+.about-vm__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  color: var(--color-muted);
+  font-size: var(--text-base);
+  line-height: 1.5;
+}
+
+.about-vm__bullet {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-lime);
+  border-radius: 1px;
+  margin-top: 8px;
+}
+
+/* Areas Served */
+.about-areas {
+  background-color: var(--color-off-white);
+  padding: var(--section-pad-y) 0;
+}
+
+.about-areas__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.about-areas__card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg) var(--space-xl);
+  color: var(--color-charcoal);
+}
+
+.about-areas__card svg {
+  color: var(--color-lime-hover);
+  flex-shrink: 0;
+}
+
+.about-areas__name {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-charcoal);
+}
+
+.about-areas__note {
+  color: var(--color-muted-dark);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+/* Certifications */
+.about-certs {
+  background-color: var(--color-dark);
+  padding: var(--section-pad-y) 0;
+}
+
+.about-certs__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.about-certs__card {
+  background-color: var(--color-charcoal);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  text-align: center;
+}
+
+.about-certs__icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background-color: var(--color-lime-subtle);
+  color: var(--color-lime);
+  margin: 0 auto var(--space-lg);
+}
+
+.about-certs__name {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-white);
+  margin-bottom: var(--space-xs);
+}
+
+.about-certs__issuer {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.about-certs__year {
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-lime);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .about-story__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .about-story__image {
+    height: 280px;
+  }
+
+  .about-vm__grid {
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+
+  .about-vm__divider {
+    width: 100%;
+    height: 2px;
+  }
+
+  .about-areas__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about-certs__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-areas__grid {
+    grid-template-columns: 1fr;
+  }
+}

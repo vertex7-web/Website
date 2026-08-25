@@ -21,9 +21,9 @@ export default function Hero() {
           Heavy Equipment Rentals &amp; Construction Supplies
         </span>
         <h1 className="hero__title">
-          We Provide the<br />
-          Muscle.<br />
-          <span className="hero__title-accent">You Build the Future.</span>
+          Empowering<br />
+          Builders.<br />
+          <span className="hero__title-accent">Elevating Standards.</span>
         </h1>
         <p className="hero__description">
           {/* CLIENT TO PROVIDE — short supporting statement about the company's value proposition */}
@@ -31,8 +31,8 @@ export default function Hero() {
           for construction projects of any scale.
         </p>
         <div className="hero__actions">
-          <Button to="/machines" variant="primary" size="lg">
-            Explore Machines
+          <Button to="/machineries" variant="primary" size="lg">
+            Explore Machineries
           </Button>
           <Button to="/contact" variant="outline" size="lg">
             Contact Us

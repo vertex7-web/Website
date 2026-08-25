@@ -1,32 +1,47 @@
+import { Link } from 'react-router';
+import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
-import SectionHeading from '../components/ui/SectionHeading';
+import { getProjects } from '../data/projects';
+import './Projects.css';
 
 export default function Projects() {
+  const projects = getProjects();
+
   return (
     <>
-      <section
-        style={{
-          minHeight: '350px',
-          background: 'var(--color-charcoal)',
-          display: 'flex',
-          alignItems: 'center',
-          marginTop: 'calc(var(--header-height) * -1)',
-          paddingTop: 'var(--header-height)',
-        }}
-      >
-        <Container>
-          <SectionHeading
-            eyebrow="Our Work"
-            title="Projects"
-          />
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="Our Work"
+        title="Projects"
+        subtitle="A portfolio of construction projects supported by Vertex 7 equipment and services."
+      />
 
-      <section style={{ padding: 'var(--section-pad-y) 0', background: 'var(--color-black)' }}>
+      <section className="projects-page" id="projects-gallery">
         <Container>
-          <p style={{ color: 'var(--color-muted)' }}>
-            Projects page will be built in Phase 3.
-          </p>
+          {projects.length === 0 ? (
+            <p className="projects-page__empty">No projects available yet.</p>
+          ) : (
+            <div className="projects-page__grid">
+              {projects.map((project) => (
+                <Link
+                  to={`/projects/${project.slug}`}
+                  className="projects-page__card"
+                  key={project.id}
+                >
+                  <img
+                    src={project.coverImage}
+                    alt={project.name}
+                    className="projects-page__card-image"
+                    loading="lazy"
+                  />
+                  <div className="projects-page__card-overlay">
+                    <span className="projects-page__card-category">{project.category}</span>
+                    <h2 className="projects-page__card-title">{project.name}</h2>
+                    <span className="projects-page__card-location">{project.location}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </Container>
       </section>
     </>

@@ -96,9 +96,15 @@
   letter-spacing: 0.1em;
 }
 
-.footer__contact-value {
+.footer__contact-value,
+.footer__contact-address-value {
   font-size: var(--text-sm);
   color: var(--color-muted);
+  transition: color var(--transition-fast);
+}
+
+.footer__contact-value:hover {
+  color: var(--color-lime);
 }
 
 /* ── Social Links ────────────────────────────────────────── */
