@@ -1,0 +1,209 @@
+/* ── Quote Form ──────────────────────────────────────────── */
+
+.quote-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* Row layout */
+.quote-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+/* Field */
+.quote-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.quote-form__label {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-white);
+}
+
+.quote-form__required {
+  color: var(--color-lime);
+}
+
+/* Input / Select / Textarea */
+.quote-form__input,
+.quote-form__select,
+.quote-form__textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-white);
+  background-color: var(--color-dark);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+  outline: none;
+}
+
+.quote-form__input::placeholder,
+.quote-form__textarea::placeholder {
+  color: var(--color-muted-dark);
+}
+
+.quote-form__input:focus,
+.quote-form__select:focus,
+.quote-form__textarea:focus {
+  border-color: var(--color-lime);
+  box-shadow: 0 0 0 3px var(--color-lime-subtle);
+}
+
+/* Error state */
+.quote-form__input--error {
+  border-color: #e53e3e;
+}
+
+.quote-form__input--error:focus {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.15);
+}
+
+.quote-form__error {
+  font-size: var(--text-xs);
+  color: #fc8181;
+  margin-top: 2px;
+}
+
+/* Select */
+.quote-form__select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23A9ADA5' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.quote-form__select option {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+}
+
+/* Textarea */
+.quote-form__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Submit */
+.quote-form__submit {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.quote-form__submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.quote-form__spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: quote-spin 0.6s linear infinite;
+}
+
+@keyframes quote-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Disclaimer */
+.quote-form__disclaimer {
+  font-size: var(--text-xs);
+  color: var(--color-muted-dark);
+  line-height: 1.5;
+}
+
+/* Honeypot — invisible */
+.quote-form__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+/* Error Banner */
+.quote-form__error-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  background-color: rgba(229, 62, 62, 0.1);
+  border: 1px solid rgba(229, 62, 62, 0.3);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  color: #fc8181;
+  font-size: var(--text-sm);
+}
+
+/* Success State */
+.quote-form__success {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-xl);
+}
+
+.quote-form__success-icon {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--color-lime-subtle);
+  color: var(--color-lime);
+  margin: 0 auto var(--space-xl);
+}
+
+.quote-form__success-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-white);
+  margin-bottom: var(--space-md);
+}
+
+.quote-form__success-text {
+  color: var(--color-muted);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto var(--space-xl);
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .quote-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-form__submit {
+    width: 100%;
+    justify-content: center;
+  }
+}

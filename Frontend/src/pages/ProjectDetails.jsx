@@ -110,7 +110,7 @@ export default function ProjectDetails() {
                 </div>
               )}
 
-              <Button to="/contact" variant="primary" size="lg" className="project-detail__sidebar-cta">
+              <Button to="/quote" variant="primary" size="lg" className="project-detail__sidebar-cta">
                 Discuss Your Project
               </Button>
             </aside>

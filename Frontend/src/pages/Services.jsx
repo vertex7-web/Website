@@ -50,7 +50,7 @@ export default function Services() {
                   </ul>
                 )}
 
-                <Button to="/contact" variant="outline-lime" size="md">
+                <Button to="/quote" variant="outline-lime" size="md">
                   Get a Quote
                 </Button>
               </div>

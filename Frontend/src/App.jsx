@@ -8,6 +8,7 @@ import Services from './pages/Services';
 import Projects from './pages/Projects';
 import ProjectDetails from './pages/ProjectDetails';
 import Contact from './pages/Contact';
+import Quote from './pages/Quote';
 
 export default function App() {
   return (
@@ -16,14 +17,16 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
-          <Route path="machines" element={<Machines />} />
-          <Route path="machines/:slug" element={<MachineDetails />} />
+          <Route path="machineries" element={<Machines />} />
+          <Route path="machineries/:slug" element={<MachineDetails />} />
           <Route path="services" element={<Services />} />
           <Route path="projects" element={<Projects />} />
           <Route path="projects/:slug" element={<ProjectDetails />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="quote" element={<Quote />} />
         </Route>
       </Routes>
     </BrowserRouter>
   );
 }
+

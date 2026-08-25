@@ -16,7 +16,7 @@ export default function FinalCTA() {
           <Button to="/contact" variant="primary" size="lg">
             Contact Us
           </Button>
-          <Button to="/contact" variant="outline" size="lg">
+          <Button to="/quote" variant="outline" size="lg">
             Request a Quote
           </Button>
         </div>
