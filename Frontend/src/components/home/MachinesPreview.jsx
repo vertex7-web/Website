@@ -20,7 +20,7 @@ export default function MachinesPreview() {
         <div className="machines-preview__grid">
           {FEATURED_MACHINES.map((machine) => (
             <Link
-              to={`/machines/${machine.slug}`}
+              to={`/machineries/${machine.slug}`}
               className="machine-card"
               key={machine.slug}
             >
@@ -39,14 +39,14 @@ export default function MachinesPreview() {
                 </span>
                 <h3 className="machine-card__title">{machine.type}</h3>
                 <p className="machine-card__description">{machine.description}</p>
-                <span className="machine-card__link">View Machine →</span>
+                <span className="machine-card__link">View Machinery →</span>
               </div>
             </Link>
           ))}
         </div>
 
         <div className="machines-preview__footer">
-          <Button to="/machines" variant="outline-lime" size="md">
+          <Button to="/machineries" variant="outline-lime" size="md">
             View All Equipment
           </Button>
         </div>

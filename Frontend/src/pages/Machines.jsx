@@ -20,7 +20,7 @@ export default function Machines() {
       <PageHero
         eyebrow="Our Fleet"
         title="Heavy Equipment"
-        subtitle="Browse our equipment catalog. Every machine is serviced, inspected, and ready for your project."
+        subtitle="Browse our equipment catalog. Every machinery is serviced, inspected, and ready for your project."
       />
 
       <section className="machines-page" id="machines-catalog">
@@ -50,7 +50,7 @@ export default function Machines() {
           <div className="machines-page__grid">
             {filtered.map((machine) => (
               <Link
-                to={`/machines/${machine.slug}`}
+                to={`/machineries/${machine.slug}`}
                 className="machines-page__card"
                 key={machine.id}
               >

@@ -7,7 +7,7 @@ import './Header.css';
 const NAV_LINKS = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
-  { label: 'Machines', to: '/machines' },
+  { label: 'Machineries', to: '/machineries' },
   { label: 'Services', to: '/services' },
   { label: 'Projects', to: '/projects' },
   { label: 'Contact', to: '/contact' },
@@ -72,7 +72,7 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="header__cta">
-            <Button to="/contact" variant="primary" size="sm">
+            <Button to="/quote" variant="primary" size="sm">
               Request a Quote
             </Button>
           </div>
@@ -114,7 +114,7 @@ export default function Header() {
             </NavLink>
           ))}
           <Button
-            to="/contact"
+            to="/quote"
             variant="primary"
             size="lg"
             className="mobile-menu__cta"

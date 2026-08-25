@@ -16,8 +16,8 @@ export default function MachineDetails() {
         <section className="machine-detail__not-found">
           <Container>
             <p>The equipment you're looking for may no longer be available.</p>
-            <Button to="/machines" variant="outline-lime" size="md">
-              View All Machines
+            <Button to="/machineries" variant="outline-lime" size="md">
+              View All Machineries
             </Button>
           </Container>
         </section>
@@ -37,7 +37,7 @@ export default function MachineDetails() {
         <Container>
           {/* Breadcrumb */}
           <nav className="machine-detail__breadcrumb" aria-label="Breadcrumb">
-            <Link to="/machines" className="machine-detail__breadcrumb-link">Equipment</Link>
+            <Link to="/machineries" className="machine-detail__breadcrumb-link">Equipment</Link>
             <span className="machine-detail__breadcrumb-sep" aria-hidden="true">/</span>
             <span className="machine-detail__breadcrumb-current">{machine.name}</span>
           </nav>
@@ -83,7 +83,7 @@ export default function MachineDetails() {
               </table>
 
               <div className="machine-detail__cta">
-                <Button to="/contact" variant="primary" size="lg">
+                <Button to="/quote" variant="primary" size="lg">
                   Inquire About This Machine
                 </Button>
               </div>

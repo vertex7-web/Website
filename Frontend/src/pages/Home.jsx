@@ -22,7 +22,7 @@ export default function Home() {
       {/* 4. Services Preview — Dark solid */}
       <ServicesPreview />
 
-      {/* 5. Machines Preview — Black */}
+      {/* 5. Machineries Preview — Black */}
       <MachinesPreview />
 
       {/* 6. Featured Projects — Light / image cards */}
