@@ -10,8 +10,9 @@ export default function About() {
       {/* Page Hero */}
       <PageHero
         eyebrow="About Us"
-        title="About Vertex 7"
-        subtitle="Heavy equipment rentals and construction supplies — built on reliability, driven by results."
+        title="At Vertex 7,"
+        subtitle="we don’t just rent out equipment — we provide the power,
+precision, and partnership that builders need to bring their visions to life."
         backgroundImage={aboutImg}
       />
 
@@ -25,12 +26,26 @@ export default function About() {
             />
             <p className="about-story__text">
               {/* CLIENT TO PROVIDE — company history and background */}
-              [CLIENT TO PROVIDE — Company founding story, history, and development.
-              How the company started, key milestones, and growth over the years.]
+              Founded in 2025, Vertex7 Heavy
+              Equipment Rental may be a new name in
+              the industry, but it carries with it years of
+              trusted experience through its sister
+              company, DRCJ Construction Supplies
+              Trading, established in 2017.
             </p>
             <p className="about-story__text">
-              [CLIENT TO PROVIDE — Current business focus, areas of expertise,
-              and what sets the company apart in the industry today.]
+              What began as a humble trading business supplying high-quality construction
+              materials, aggregates, and ready-mixed concrete through DRCJ has grown
+              into a full-service group capable of providing complete construction support
+              solutions — from materials to machinery.
+            </p>
+            <p className="about-story__text">
+              With the growing demand for reliable heavy equipment and dependable
+              service partners, Vertex7 was established to expand our reach and strengthen
+              our commitment to the construction sector. Backed by a team of experienced
+              operators, a modern fleet of well-maintained units, and the proven reliability of
+              DRCJ, Vertex7 ensures that every project is built on quality, efficiency, and
+              trust.
             </p>
           </div>
           <div className="about-story__image-wrap">
@@ -51,21 +66,38 @@ export default function About() {
             <div className="about-vm__card">
               <span className="about-vm__label">Vision</span>
               <h3 className="about-vm__title">
-                [CLIENT TO PROVIDE — Company vision statement]
+                To be a trusted and dependable partner in the construction industry
               </h3>
               <p className="about-vm__text">
-                [CLIENT TO PROVIDE — expanded vision description.]
+                — known for our reliability, integrity, and humble pursuit of
+                excellence. </p >
+              <p className="about-vm__text">
+                We envision a future where every project we serve becomes a
+                lasting symbol of quality, teamwork, and genuine commitment to
+                nation-building.
               </p>
             </div>
             <div className="about-vm__divider" aria-hidden="true" />
             <div className="about-vm__card">
               <span className="about-vm__label">Mission</span>
-              <h3 className="about-vm__title">
-                [CLIENT TO PROVIDE — Company mission statement]
-              </h3>
-              <p className="about-vm__text">
-                [CLIENT TO PROVIDE — expanded mission description.]
-              </p>
+              <ul className="about-vm__list">
+                <li className="about-vm__item">
+                  <span className="about-vm__bullet" aria-hidden="true" />
+                  To provide high-quality materials and machinery that ensure safety, efficiency, and durability in every project.
+                </li>
+                <li className="about-vm__item">
+                  <span className="about-vm__bullet" aria-hidden="true" />
+                  To deliver customer-focused services through professionalism, timely delivery, and operational excellence.
+                </li>
+                <li className="about-vm__item">
+                  <span className="about-vm__bullet" aria-hidden="true" />
+                  To uphold our legacy of integrity and reliability, established through years of partnership and trust.
+                </li>
+                <li className="about-vm__item">
+                  <span className="about-vm__bullet" aria-hidden="true" />
+                  To promote sustainability and innovation in all aspects of our operations.
+                </li>
+              </ul>
             </div>
           </div>
         </Container>

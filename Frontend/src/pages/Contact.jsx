@@ -99,16 +99,14 @@ export default function Contact() {
             {/* Map Placeholder */}
             <div className="contact-page__map-area">
               <h2 className="contact-page__section-title">Our Location</h2>
-              <div className="contact-page__map-placeholder">
-                {/* Replace with actual Google Maps embed once client provides address */}
-                <div className="contact-page__map-inner">
-                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                    <circle cx="12" cy="10" r="3" />
-                  </svg>
-                  <p>Map will be embedded here once the business address is confirmed.</p>
-                  <span>[CLIENT TO PROVIDE — Google Maps embed or address]</span>
-                </div>
+              <div className="contact-page__map-embed">
+                <iframe
+                  title="Vertex 7 Location"
+                  src="https://www.google.com/maps?q=43+Viola+St.,+Santa+Rita+Matanda,+San+Miguel,+Bulacan&output=embed"
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
               </div>
 
               {/* Quick CTA */}
@@ -117,7 +115,7 @@ export default function Contact() {
                 <p className="contact-page__quick-cta-text">
                   Request a quote or reach out directly. We'll respond within one business day.
                 </p>
-                <Button to="/contact" variant="primary" size="lg">
+                <Button to="/quote" variant="primary" size="lg">
                   Request a Quote
                 </Button>
               </div>
