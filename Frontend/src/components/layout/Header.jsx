@@ -45,52 +45,54 @@ export default function Header() {
   }, [menuOpen]);
 
   return (
-    <header className={`header ${scrolled ? 'header--scrolled' : ''}`} id="site-header">
-      <Container className="header__inner">
-        {/* Logo */}
-        <Link to="/" className="header__logo" aria-label="Vertex 7 — Home">
-          <span className="header__logo-mark">VERTEX</span>
-          <span className="header__logo-accent">7</span>
-        </Link>
+    <>
+      <header className={`header ${scrolled ? 'header--scrolled' : ''}`} id="site-header">
+        <Container className="header__inner">
+          {/* Logo */}
+          <Link to="/" className="header__logo" aria-label="Vertex 7 — Home">
+            <span className="header__logo-mark">VERTEX</span>
+            <span className="header__logo-accent">7</span>
+          </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="header__nav" aria-label="Main navigation">
-          {NAV_LINKS.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              className={({ isActive }) =>
-                `header__link ${isActive ? 'header__link--active' : ''}`
-              }
-              end={link.to === '/'}
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </nav>
+          {/* Desktop Navigation */}
+          <nav className="header__nav" aria-label="Main navigation">
+            {NAV_LINKS.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                className={({ isActive }) =>
+                  `header__link ${isActive ? 'header__link--active' : ''}`
+                }
+                end={link.to === '/'}
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </nav>
 
-        {/* Desktop CTA */}
-        <div className="header__cta">
-          <Button to="/contact" variant="primary" size="sm">
-            Request a Quote
-          </Button>
-        </div>
+          {/* Desktop CTA */}
+          <div className="header__cta">
+            <Button to="/contact" variant="primary" size="sm">
+              Request a Quote
+            </Button>
+          </div>
 
-        {/* Mobile Menu Toggle */}
-        <button
-          className={`header__hamburger ${menuOpen ? 'header__hamburger--open' : ''}`}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-          id="mobile-menu-toggle"
-        >
-          <span className="header__hamburger-line" />
-          <span className="header__hamburger-line" />
-          <span className="header__hamburger-line" />
-        </button>
-      </Container>
+          {/* Mobile Menu Toggle */}
+          <button
+            className={`header__hamburger ${menuOpen ? 'header__hamburger--open' : ''}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            id="mobile-menu-toggle"
+          >
+            <span className="header__hamburger-line" />
+            <span className="header__hamburger-line" />
+            <span className="header__hamburger-line" />
+          </button>
+        </Container>
+      </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay — outside <header> so it's not clipped by its fixed height */}
       <div
         className={`mobile-menu ${menuOpen ? 'mobile-menu--open' : ''}`}
         aria-hidden={!menuOpen}
@@ -122,6 +124,6 @@ export default function Header() {
           </Button>
         </nav>
       </div>
-    </header>
+    </>
   );
 }

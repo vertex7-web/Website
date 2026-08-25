@@ -1,32 +1,61 @@
+import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
-import SectionHeading from '../components/ui/SectionHeading';
+import Button from '../components/ui/Button';
+import { getServices } from '../data/services';
+import './Services.css';
 
 export default function Services() {
+  const services = getServices();
+
   return (
     <>
-      <section
-        style={{
-          minHeight: '350px',
-          background: 'var(--color-charcoal)',
-          display: 'flex',
-          alignItems: 'center',
-          marginTop: 'calc(var(--header-height) * -1)',
-          paddingTop: 'var(--header-height)',
-        }}
-      >
-        <Container>
-          <SectionHeading
-            eyebrow="What We Offer"
-            title="Construction Services"
-          />
-        </Container>
-      </section>
+      <PageHero
+        eyebrow="What We Offer"
+        title="Construction Services"
+        subtitle="From equipment rental to on-site support — comprehensive services built for the field."
+      />
 
-      <section style={{ padding: 'var(--section-pad-y) 0', background: 'var(--color-black)' }}>
+      <section className="services-page" id="services-directory">
         <Container>
-          <p style={{ color: 'var(--color-muted)' }}>
-            Services page will be built in Phase 3.
-          </p>
+          {services.map((service, index) => (
+            <article
+              className={`services-page__item ${index % 2 !== 0 ? 'services-page__item--reversed' : ''}`}
+              key={service.id}
+              id={service.slug}
+            >
+              {/* Image */}
+              <div className="services-page__image-wrap">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="services-page__image"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Content */}
+              <div className="services-page__content">
+                <span className="services-page__number">{service.number}</span>
+                <h2 className="services-page__title">{service.title}</h2>
+                <p className="services-page__description">{service.description}</p>
+
+                {service.benefits.length > 0 && (
+                  <ul className="services-page__benefits">
+                    {service.benefits.map((benefit) => (
+                      <li className="services-page__benefit" key={benefit}>
+                        <span className="services-page__bullet" aria-hidden="true" />
+                        {benefit}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                <Button to="/contact" variant="outline-lime" size="md">
+                  Get a Quote
+                </Button>
+              </div>
+            </article>
+          ))}
         </Container>
       </section>
     </>

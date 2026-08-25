@@ -2,40 +2,10 @@ import { Link } from 'react-router';
 import Container from '../ui/Container';
 import SectionHeading from '../ui/SectionHeading';
 import Button from '../ui/Button';
-import machineExcavator from '../../assets/machine-excavator.jpg';
-import machineBulldozer from '../../assets/machine-bulldozer.jpg';
-import machineCrane from '../../assets/machine-crane.jpg';
+import { getMachines } from '../../data/machines';
 import './MachinesPreview.css';
 
-/* ── Placeholder machine data ────────────────────────────────
-   Replace with actual equipment once client provides inventory.
-   ─────────────────────────────────────────────────────────── */
-const FEATURED_MACHINES = [
-  {
-    slug: 'hydraulic-excavator',
-    image: machineExcavator,
-    type: 'Excavator',
-    brand: '[Brand]',
-    model: '[Model]',
-    description: 'Heavy-duty hydraulic excavator for earthmoving, grading, and excavation work.',
-  },
-  {
-    slug: 'track-bulldozer',
-    image: machineBulldozer,
-    type: 'Bulldozer',
-    brand: '[Brand]',
-    model: '[Model]',
-    description: 'Powerful track-type bulldozer for land clearing, grading, and heavy push operations.',
-  },
-  {
-    slug: 'mobile-crane',
-    image: machineCrane,
-    type: 'Crane',
-    brand: '[Brand]',
-    model: '[Model]',
-    description: 'High-capacity mobile crane for structural steel, precast concrete, and heavy lifting.',
-  },
-];
+const FEATURED_MACHINES = getMachines().slice(0, 3);
 
 export default function MachinesPreview() {
   return (
