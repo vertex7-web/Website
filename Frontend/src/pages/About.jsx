@@ -1,6 +1,7 @@
 import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import SectionHeading from '../components/ui/SectionHeading';
+import Image from '../components/ui/Image';
 import aboutImg from '../assets/about-preview.jpg';
 import './About.css';
 
@@ -49,10 +50,11 @@ precision, and partnership that builders need to bring their visions to life."
             </p>
           </div>
           <div className="about-story__image-wrap">
-            <img
+            <Image
               src={aboutImg}
               alt="Vertex 7 team at a construction site"
               className="about-story__image"
+              fallbackText="Vertex 7 Operations"
               loading="lazy"
             />
           </div>

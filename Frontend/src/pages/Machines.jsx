@@ -1,14 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
-import { getMachines, getMachineCategories } from '../data/machines';
+import Image from '../components/ui/Image';
+import { fetchMachines, fetchMachineCategories, getMachines, getMachineCategories } from '../data/machines';
 import './Machines.css';
 
 export default function Machines() {
-  const machines = getMachines();
-  const categories = getMachineCategories();
+  const [machines, setMachines] = useState(getMachines());
+  const [categories, setCategories] = useState(getMachineCategories());
   const [activeCategory, setActiveCategory] = useState('All');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([fetchMachines(), fetchMachineCategories()]).then(
+      ([machinesData, categoriesData]) => {
+        setMachines(machinesData);
+        setCategories(categoriesData);
+        setLoading(false);
+      }
+    );
+  }, []);
 
   const filtered =
     activeCategory === 'All'
@@ -55,10 +67,11 @@ export default function Machines() {
                 key={machine.id}
               >
                 <div className="machines-page__card-image-wrap">
-                  <img
+                  <Image
                     src={machine.image}
                     alt={`${machine.type} — ${machine.brand} ${machine.model}`}
                     className="machines-page__card-image"
+                    fallbackText={`${machine.brand} ${machine.model}`}
                     loading="lazy"
                   />
                   <span className="machines-page__card-badge">{machine.type}</span>
@@ -76,7 +89,9 @@ export default function Machines() {
           </div>
 
           {filtered.length === 0 && (
-            <p className="machines-page__empty">No equipment found in this category.</p>
+            <p className="machines-page__empty">
+              {loading ? 'Loading equipment...' : 'No equipment found in this category.'}
+            </p>
           )}
         </Container>
       </section>

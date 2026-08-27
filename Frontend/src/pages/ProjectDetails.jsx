@@ -1,15 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router';
 import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import Button from '../components/ui/Button';
-import { getProjectBySlug } from '../data/projects';
+import Image from '../components/ui/Image';
+import { fetchProjectBySlug } from '../data/projects';
 import './ProjectDetails.css';
 
 export default function ProjectDetails() {
   const { slug } = useParams();
-  const project = getProjectBySlug(slug);
+  const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [lightboxIndex, setLightboxIndex] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    fetchProjectBySlug(slug).then((data) => {
+      setProject(data);
+      setLoading(false);
+    });
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <>
+        <PageHero eyebrow="Projects" title="Loading..." />
+        <section className="project-detail__not-found">
+          <Container><p>Loading project details...</p></Container>
+        </section>
+      </>
+    );
+  }
 
   if (!project) {
     return (
@@ -33,7 +54,7 @@ export default function ProjectDetails() {
         eyebrow={project.category}
         title={project.name}
         subtitle={project.location}
-        backgroundImage={project.coverImage}
+        backgroundImage={project.coverImage || project.cover_image}
       />
 
       <section className="project-detail" id="project-detail">
@@ -50,17 +71,18 @@ export default function ProjectDetails() {
             <div className="project-detail__main">
               <h2 className="project-detail__section-title">Project Gallery</h2>
               <div className="project-detail__gallery">
-                {project.gallery.map((img, i) => (
+                {(project.gallery || []).map((img, i) => (
                   <button
                     key={i}
                     className="project-detail__gallery-item"
                     onClick={() => setLightboxIndex(i)}
                     aria-label={`View image ${i + 1}`}
                   >
-                    <img
+                    <Image
                       src={img}
                       alt={`${project.name} — image ${i + 1}`}
                       className="project-detail__gallery-image"
+                      fallbackText={`${project.name} #${i + 1}`}
                       loading="lazy"
                     />
                   </button>
@@ -133,13 +155,16 @@ export default function ProjectDetails() {
           >
             ✕
           </button>
-          <img
-            src={project.gallery[lightboxIndex]}
-            alt={`${project.name} — image ${lightboxIndex + 1}`}
-            className="project-lightbox__image"
-            onClick={(e) => e.stopPropagation()}
-          />
-          {project.gallery.length > 1 && (
+          <div className="project-lightbox__image-wrap" onClick={(e) => e.stopPropagation()}>
+            <Image
+              src={(project.gallery || [])[lightboxIndex]}
+              alt={`${project.name} — image ${lightboxIndex + 1}`}
+              className="project-lightbox__image"
+              fit="contain"
+              fallbackText={project.name}
+            />
+          </div>
+          {(project.gallery || []).length > 1 && (
             <div className="project-lightbox__nav">
               <button
                 className="project-lightbox__btn"

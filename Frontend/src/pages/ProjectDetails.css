@@ -219,6 +219,17 @@
   justify-content: center;
 }
 
+.project-lightbox__image-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 90vw;
+  max-height: 80vh;
+  width: auto;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
 .project-lightbox__image {
   max-width: 90vw;
   max-height: 80vh;
