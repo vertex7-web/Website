@@ -17,6 +17,8 @@ export default function Projects() {
     });
   }, []);
 
+  const hasOddCount = projects.length % 2 !== 0;
+
   return (
     <>
       <PageHero
@@ -33,26 +35,29 @@ export default function Projects() {
             <p className="projects-page__empty">No projects available yet.</p>
           ) : (
             <div className="projects-page__grid">
-              {projects.map((project) => (
-                <Link
-                  to={`/projects/${project.slug}`}
-                  className="projects-page__card"
-                  key={project.id}
-                >
-                  <Image
-                    src={project.coverImage || project.cover_image}
-                    alt={project.name}
-                    className="projects-page__card-image"
-                    fallbackText={project.name}
-                    loading="lazy"
-                  />
-                  <div className="projects-page__card-overlay">
-                    <span className="projects-page__card-category">{project.category}</span>
-                    <h2 className="projects-page__card-title">{project.name}</h2>
-                    <span className="projects-page__card-location">{project.location}</span>
-                  </div>
-                </Link>
-              ))}
+              {projects.map((project, index) => {
+                const isFeatured = hasOddCount && index === 0;
+                return (
+                  <Link
+                    to={`/projects/${project.slug}`}
+                    className={`projects-page__card ${isFeatured ? 'projects-page__card--featured' : ''}`}
+                    key={project.id}
+                  >
+                    <Image
+                      src={project.coverImage || project.cover_image}
+                      alt={project.name}
+                      className="projects-page__card-image"
+                      fallbackText={project.name}
+                      loading={isFeatured ? 'eager' : 'lazy'}
+                    />
+                    <div className="projects-page__card-overlay">
+                      <span className="projects-page__card-category">{project.category}</span>
+                      <h2 className="projects-page__card-title">{project.name}</h2>
+                      <span className="projects-page__card-location">{project.location}</span>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           )}
         </Container>
