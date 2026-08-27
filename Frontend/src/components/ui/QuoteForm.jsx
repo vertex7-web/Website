@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { Link } from 'react-router';
 import { getMachines } from '../../data/machines';
 import { getServices } from '../../data/services';
 import './QuoteForm.css';
@@ -364,8 +365,15 @@ export default function QuoteForm() {
       </button>
 
       <p className="quote-form__disclaimer">
-        By submitting this form, you agree to be contacted regarding your inquiry.
-        We typically respond within one business day.
+        By submitting this quote request, you agree to our{' '}
+        <Link to="/terms" className="quote-form__legal-link" target="_blank" rel="noopener noreferrer">
+          Terms of Service
+        </Link>{' '}
+        and acknowledge our{' '}
+        <Link to="/privacy" className="quote-form__legal-link" target="_blank" rel="noopener noreferrer">
+          Privacy Policy
+        </Link>.
+        We protect your contact details and never share or sell your email.
       </p>
     </form>
   );

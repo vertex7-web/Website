@@ -11,6 +11,8 @@ import Projects from './pages/Projects';
 import ProjectDetails from './pages/ProjectDetails';
 import Contact from './pages/Contact';
 import Quote from './pages/Quote';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
 
 // Admin pages
 import AdminLogin from './pages/admin/AdminLogin';
@@ -39,6 +41,8 @@ export default function App() {
             <Route path="projects/:slug" element={<ProjectDetails />} />
             <Route path="contact" element={<Contact />} />
             <Route path="quote" element={<Quote />} />
+            <Route path="terms" element={<Terms />} />
+            <Route path="privacy" element={<Privacy />} />
           </Route>
 
           {/* Admin routes */}

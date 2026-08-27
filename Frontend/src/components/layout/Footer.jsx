@@ -95,6 +95,11 @@ export default function Footer() {
           <p className="footer__copyright">
             &copy; {currentYear} Vertex 7. All rights reserved.
           </p>
+          <div className="footer__legal">
+            <Link to="/terms" className="footer__legal-link">Terms of Service</Link>
+            <span className="footer__legal-sep" aria-hidden="true">•</span>
+            <Link to="/privacy" className="footer__legal-link">Privacy Policy</Link>
+          </div>
         </div>
       </Container>
     </footer>
