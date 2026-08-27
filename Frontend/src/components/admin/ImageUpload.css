@@ -1,0 +1,94 @@
+/* ── Image Upload ────────────────────────────────────────── */
+
+.image-upload__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.image-upload__dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 160px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.image-upload__dropzone:hover {
+  border-color: var(--color-lime);
+  color: var(--color-lime);
+}
+
+.image-upload__dropzone:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.image-upload__preview {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.image-upload__image {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.image-upload__remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: var(--color-white);
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color var(--transition-fast);
+}
+
+.image-upload__remove:hover {
+  background-color: #e53e3e;
+}
+
+.image-upload__spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: img-spin 0.6s linear infinite;
+}
+
+@keyframes img-spin {
+  to { transform: rotate(360deg); }
+}
+
+.image-upload__error {
+  display: block;
+  font-size: var(--text-xs);
+  color: #fc8181;
+  margin-top: 4px;
+}

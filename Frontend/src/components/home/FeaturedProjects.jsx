@@ -1,41 +1,18 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import Container from '../ui/Container';
 import SectionHeading from '../ui/SectionHeading';
-import projectHighway from '../../assets/project-highway.jpg';
-import projectBuilding from '../../assets/project-building.jpg';
-import projectBridge from '../../assets/project-bridge.jpg';
+import Image from '../ui/Image';
+import { fetchProjects, getProjects } from '../../data/projects';
 import './FeaturedProjects.css';
 
-/* ── Placeholder project data ────────────────────────────────
-   These are development-only placeholders.
-   Replace with actual project data from the client.
-   Do NOT present these as real projects.
-   ─────────────────────────────────────────────────────────── */
-const PROJECTS = [
-  {
-    slug: 'project-placeholder-1',
-    image: projectHighway,
-    name: '[Project Name — CLIENT TO PROVIDE]',
-    location: '[Location]',
-    category: 'Infrastructure',
-  },
-  {
-    slug: 'project-placeholder-2',
-    image: projectBuilding,
-    name: '[Project Name — CLIENT TO PROVIDE]',
-    location: '[Location]',
-    category: 'Commercial',
-  },
-  {
-    slug: 'project-placeholder-3',
-    image: projectBridge,
-    name: '[Project Name — CLIENT TO PROVIDE]',
-    location: '[Location]',
-    category: 'Infrastructure',
-  },
-];
-
 export default function FeaturedProjects() {
+  const [projects, setProjects] = useState(getProjects().slice(0, 3));
+
+  useEffect(() => {
+    fetchProjects().then((data) => setProjects(data.slice(0, 3)));
+  }, []);
+
   return (
     <section className="featured-projects" id="featured-projects">
       <Container>
@@ -48,16 +25,17 @@ export default function FeaturedProjects() {
         />
 
         <div className="featured-projects__grid">
-          {PROJECTS.map((project, index) => (
+          {projects.map((project, index) => (
             <Link
               to={`/projects/${project.slug}`}
               className={`project-card ${index === 0 ? 'project-card--featured' : ''}`}
-              key={project.slug}
+              key={project.id || project.slug}
             >
-              <img
-                src={project.image}
+              <Image
+                src={project.coverImage || project.cover_image}
                 alt={project.name}
                 className="project-card__image"
+                fallbackText={project.name}
                 loading="lazy"
               />
               <div className="project-card__overlay">

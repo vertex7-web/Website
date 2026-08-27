@@ -1,13 +1,19 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import Container from '../ui/Container';
 import SectionHeading from '../ui/SectionHeading';
 import Button from '../ui/Button';
-import { getMachines } from '../../data/machines';
+import Image from '../ui/Image';
+import { fetchMachines, getMachines } from '../../data/machines';
 import './MachinesPreview.css';
 
-const FEATURED_MACHINES = getMachines().slice(0, 3);
-
 export default function MachinesPreview() {
+  const [machines, setMachines] = useState(getMachines().slice(0, 3));
+
+  useEffect(() => {
+    fetchMachines().then((data) => setMachines(data.slice(0, 3)));
+  }, []);
+
   return (
     <section className="machines-preview" id="machines-preview">
       <Container>
@@ -18,17 +24,18 @@ export default function MachinesPreview() {
         />
 
         <div className="machines-preview__grid">
-          {FEATURED_MACHINES.map((machine) => (
+          {machines.map((machine) => (
             <Link
               to={`/machineries/${machine.slug}`}
               className="machine-card"
-              key={machine.slug}
+              key={machine.id || machine.slug}
             >
               <div className="machine-card__image-wrap">
-                <img
+                <Image
                   src={machine.image}
                   alt={`${machine.type} — ${machine.brand} ${machine.model}`}
                   className="machine-card__image"
+                  fallbackText={`${machine.brand} ${machine.model}`}
                   loading="lazy"
                 />
                 <span className="machine-card__badge">{machine.type}</span>
