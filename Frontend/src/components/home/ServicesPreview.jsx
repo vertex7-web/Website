@@ -1,12 +1,11 @@
+import { Link } from 'react-router';
 import Container from '../ui/Container';
 import SectionHeading from '../ui/SectionHeading';
 import './ServicesPreview.css';
 
-/* ── Placeholder service data ────────────────────────────────
-   Replace with actual services once client confirms the list.
-   ─────────────────────────────────────────────────────────── */
 const SERVICES = [
   {
+    slug: 'heavy-equipment-rental',
     icon: (
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="6" width="20" height="12" rx="2" />
@@ -20,15 +19,17 @@ const SERVICES = [
     description: 'Excavators, loaders, bulldozers, cranes, and more — all maintained to the highest standards and ready for deployment.',
   },
   {
+    slug: 'equipment-operation',
     icon: (
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
       </svg>
     ),
-    title: 'Equipment Transport',
-    description: 'Safe and timely transport of heavy machinery to and from your project site, with professional handling every step of the way.',
+    title: 'Equipment Operation',
+    description: 'Experienced and certified operators for excavators, loaders, bulldozers, cranes, and more.',
   },
   {
+    slug: 'construction-supplies',
     icon: (
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
@@ -40,6 +41,7 @@ const SERVICES = [
     description: 'Quality construction materials and supplies to keep your project moving. Aggregates, concrete, and essential building materials.',
   },
   {
+    slug: 'preventive-maintenance-and-field-support',
     icon: (
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
@@ -63,7 +65,11 @@ export default function ServicesPreview() {
 
         <div className="services-preview__grid">
           {SERVICES.map((service) => (
-            <article className="service-card" key={service.title}>
+            <Link
+              to={`/services#${service.slug}`}
+              className="service-card"
+              key={service.slug}
+            >
               <div className="service-card__icon" aria-hidden="true">
                 {service.icon}
               </div>
@@ -72,7 +78,7 @@ export default function ServicesPreview() {
               <span className="service-card__link">
                 Learn More →
               </span>
-            </article>
+            </Link>
           ))}
         </div>
       </Container>
