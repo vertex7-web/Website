@@ -8,11 +8,21 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
+    if (!supabase) {
       setLoading(false);
-    });
+      return;
+    }
+
+    // Get initial session
+    supabase.auth
+      .getSession()
+      .then(({ data: { session } }) => {
+        setUser(session?.user ?? null);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -21,10 +31,15 @@ export function AuthProvider({ children }) {
       }
     );
 
-    return () => subscription.unsubscribe();
+    return () => subscription?.unsubscribe?.();
   }, []);
 
   async function signIn(email, password) {
+    if (!supabase) {
+      throw new Error(
+        'Supabase is not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your environment variables.'
+      );
+    }
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -33,6 +48,7 @@ export function AuthProvider({ children }) {
   }
 
   async function signOut() {
+    if (!supabase) return;
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
   }
