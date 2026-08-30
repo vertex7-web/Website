@@ -59,12 +59,22 @@ export default function ProjectDetails() {
 
       <section className="project-detail" id="project-detail">
         <Container>
-          {/* Breadcrumb */}
-          <nav className="project-detail__breadcrumb" aria-label="Breadcrumb">
-            <Link to="/projects" className="project-detail__breadcrumb-link">Projects</Link>
-            <span className="project-detail__breadcrumb-sep" aria-hidden="true">/</span>
-            <span className="project-detail__breadcrumb-current">{project.name}</span>
-          </nav>
+          {/* Navigation Bar: Back Button & Breadcrumbs */}
+          <div className="project-detail__nav-bar">
+            <Link to="/projects" className="project-detail__back-btn" aria-label="Back to Projects">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <line x1="19" y1="12" x2="5" y2="12" />
+                <polyline points="12 19 5 12 12 5" />
+              </svg>
+              <span>Back</span>
+            </Link>
+
+            <nav className="project-detail__breadcrumb" aria-label="Breadcrumb">
+              <Link to="/projects" className="project-detail__breadcrumb-link">Projects</Link>
+              <span className="project-detail__breadcrumb-sep" aria-hidden="true">/</span>
+              <span className="project-detail__breadcrumb-current">{project.name}</span>
+            </nav>
+          </div>
 
           <div className="project-detail__grid">
             {/* Main Content */}
