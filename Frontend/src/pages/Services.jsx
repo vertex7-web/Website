@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router';
 import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import Button from '../components/ui/Button';
@@ -8,10 +9,25 @@ import './Services.css';
 
 export default function Services() {
   const [services, setServices] = useState(getServices());
+  const location = useLocation();
 
   useEffect(() => {
     fetchServices().then((data) => setServices(data));
   }, []);
+
+  // Smooth scroll to the targeted service section if a hash is present
+  useEffect(() => {
+    if (location.hash) {
+      const targetId = location.hash.replace('#', '');
+      const element = document.getElementById(targetId);
+      if (element) {
+        // Small delay to ensure layout and images are settled
+        requestAnimationFrame(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+    }
+  }, [location.hash, services]);
 
   return (
     <>

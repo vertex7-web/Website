@@ -7,6 +7,7 @@
 
 /* Service Item */
 .services-page__item {
+  scroll-margin-top: 100px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-3xl);
@@ -113,7 +114,7 @@
     direction: ltr;
   }
 
-  .services-page__image {
+  .services-page__image-wrap {
     height: 280px;
   }
 
