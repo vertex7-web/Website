@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
-import Image from '../../components/ui/Image';
 import { supabase } from '../../lib/supabase';
 import ImageUpload from '../../components/admin/ImageUpload';
+import MultiImageUpload from '../../components/admin/MultiImageUpload';
 
 function slugify(text) {
   return text
@@ -80,16 +80,6 @@ export default function AdminProjectForm() {
     }));
   }
 
-  function handleGalleryAdd(url) {
-    setForm((prev) => ({ ...prev, gallery: [...prev.gallery, url] }));
-  }
-
-  function handleGalleryRemove(index) {
-    setForm((prev) => ({
-      ...prev,
-      gallery: prev.gallery.filter((_, i) => i !== index),
-    }));
-  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -253,42 +243,23 @@ export default function AdminProjectForm() {
         <div className="admin-form__section">
           <h3 className="admin-form__section-title">Images</h3>
           <div className="admin-form__field">
-            <label className="admin-form__label">Cover Image</label>
+            <label className="admin-form__label">Cover Image (Featured / Hero)</label>
             <ImageUpload
               folder="projects"
               value={form.cover_image}
               onChange={(url) => setForm((prev) => ({ ...prev, cover_image: url }))}
+              enableCrop={true}
+              defaultAspect="16:10"
+              label="Upload Project Cover Image"
             />
           </div>
           <div className="admin-form__field">
-            <label className="admin-form__label">Gallery</label>
-            <div className="admin-gallery">
-              {form.gallery.map((url, i) => (
-                <div key={i} className="admin-gallery__item">
-                  <Image
-                    src={url}
-                    alt={`Gallery ${i + 1}`}
-                    className="admin-gallery__image"
-                    fallbackText={`Gallery ${i + 1}`}
-                  />
-                  <button
-                    type="button"
-                    className="admin-gallery__remove"
-                    onClick={() => handleGalleryRemove(i)}
-                  >
-                    ✕
-                  </button>
-                </div>
-              ))}
-            </div>
-            <div style={{ marginTop: '0.75rem' }}>
-              <ImageUpload
-                folder="projects"
-                value=""
-                onChange={handleGalleryAdd}
-                label="Add Gallery Image"
-              />
-            </div>
+            <label className="admin-form__label">Project Gallery</label>
+            <MultiImageUpload
+              folder="projects"
+              images={form.gallery}
+              onChange={(newGallery) => setForm((prev) => ({ ...prev, gallery: newGallery }))}
+            />
           </div>
         </div>
 

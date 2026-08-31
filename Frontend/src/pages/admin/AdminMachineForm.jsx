@@ -134,11 +134,14 @@ export default function AdminMachineForm() {
         </div>
 
         <div className="admin-form__section">
-          <h3 className="admin-form__section-title">Image</h3>
+          <h3 className="admin-form__section-title">Machinery Image</h3>
           <ImageUpload
             folder="machines"
             value={form.image}
             onChange={(url) => setForm((prev) => ({ ...prev, image: url }))}
+            enableCrop={true}
+            defaultAspect="16:10"
+            label="Upload Machinery Image"
           />
         </div>
 

@@ -63,8 +63,8 @@ export default function AdminServices() {
           <tbody>
             {services.map((s) => (
               <tr key={s.id}>
-                <td style={{ color: '#555', fontWeight: 700 }}>{s.number}</td>
-                <td>
+                <td className="admin-table__cell-number">{s.number}</td>
+                <td className="admin-table__cell-thumb">
                   <Image
                     src={s.image}
                     alt={s.title}
@@ -74,8 +74,8 @@ export default function AdminServices() {
                     showFallbackIcon={false}
                   />
                 </td>
-                <td style={{ color: '#fff', fontWeight: 500 }}>{s.title}</td>
-                <td>
+                <td className="admin-table__cell-name">{s.title}</td>
+                <td className="admin-table__cell-status">
                   <button
                     className={`admin-badge ${s.published ? 'admin-badge--published' : 'admin-badge--draft'}`}
                     onClick={() => handleTogglePublish(s)}
@@ -84,7 +84,7 @@ export default function AdminServices() {
                     {s.published ? '● Published' : '○ Draft'}
                   </button>
                 </td>
-                <td>
+                <td className="admin-table__cell-actions">
                   <div className="admin-table__actions">
                     <Link
                       to={`/admin/services/${s.id}/edit`}

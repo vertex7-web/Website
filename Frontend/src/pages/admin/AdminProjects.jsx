@@ -63,7 +63,7 @@ export default function AdminProjects() {
           <tbody>
             {projects.map((p) => (
               <tr key={p.id}>
-                <td>
+                <td className="admin-table__cell-thumb">
                   <Image
                     src={p.cover_image}
                     alt={p.name}
@@ -73,9 +73,9 @@ export default function AdminProjects() {
                     showFallbackIcon={false}
                   />
                 </td>
-                <td style={{ color: '#fff', fontWeight: 500 }}>{p.name}</td>
-                <td>{p.category || '—'}</td>
-                <td>
+                <td className="admin-table__cell-name">{p.name}</td>
+                <td className="admin-table__cell-category">{p.category || 'General'}</td>
+                <td className="admin-table__cell-status">
                   <button
                     className={`admin-badge ${p.published ? 'admin-badge--published' : 'admin-badge--draft'}`}
                     onClick={() => handleTogglePublish(p)}
@@ -84,7 +84,7 @@ export default function AdminProjects() {
                     {p.published ? '● Published' : '○ Draft'}
                   </button>
                 </td>
-                <td>
+                <td className="admin-table__cell-actions">
                   <div className="admin-table__actions">
                     <Link
                       to={`/admin/projects/${p.id}/edit`}
