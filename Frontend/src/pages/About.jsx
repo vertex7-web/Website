@@ -1,19 +1,45 @@
+import { useState } from 'react';
 import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import SectionHeading from '../components/ui/SectionHeading';
 import Image from '../components/ui/Image';
 import aboutImg from '../assets/about-preview.jpg';
+import bir2303Img from '../assets/BIR 2303.jpg';
+import businessPermitImg from '../assets/Business permit.jpg';
+import dtiImg from '../assets/DTI.jpg';
 import './About.css';
 
+const certifications = [
+  {
+    name: 'DTI Certificate of Registration',
+    issuer: 'Department of Trade and Industry (DTI)',
+    tag: 'Business Name Registration',
+    image: dtiImg,
+  },
+  {
+    name: "Mayor's / Business Permit",
+    issuer: 'Local Government Unit (LGU)',
+    tag: 'Business Operations Permit',
+    image: businessPermitImg,
+  },
+  {
+    name: 'BIR Certificate of Registration',
+    issuer: 'Bureau of Internal Revenue (Form 2303)',
+    tag: 'Tax & Corporate Compliance',
+    image: bir2303Img,
+  },
+];
+
 export default function About() {
+  const [selectedCert, setSelectedCert] = useState(null);
+
   return (
     <>
       {/* Page Hero */}
       <PageHero
         eyebrow="About Us"
         title="At Vertex 7,"
-        subtitle="we don’t just rent out equipment — we provide the power,
-precision, and partnership that builders need to bring their visions to life."
+        subtitle="we don’t just rent out equipment — we provide the power, precision, and partnership that builders need to bring their visions to life."
         backgroundImage={aboutImg}
       />
 
@@ -134,30 +160,84 @@ precision, and partnership that builders need to bring their visions to life."
           <SectionHeading
             eyebrow="Credentials"
             title="Certifications & Licenses"
-            subtitle="Our team maintains the certifications and licenses required to deliver safe, compliant service."
+            subtitle="Verified official permits and statutory government registrations establishing Vertex 7 as a legitimate, compliant partner."
           />
           <div className="about-certs__grid">
-            {[
-              { name: '[Certification Name]', issuer: '[Issuing Body]', year: '[Year]' },
-              { name: '[Certification Name]', issuer: '[Issuing Body]', year: '[Year]' },
-              { name: '[Certification Name]', issuer: '[Issuing Body]', year: '[Year]' },
-            ].map((cert, i) => (
-              <div className="about-certs__card" key={i}>
-                <div className="about-certs__icon" aria-hidden="true">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M12 15l-2 5l2-1l2 1l-2-5z" />
-                    <circle cx="12" cy="9" r="6" />
-                    <path d="M9 9l2 2l4-4" />
-                  </svg>
+            {certifications.map((cert, i) => (
+              <div
+                className="about-certs__card"
+                key={i}
+                onClick={() => setSelectedCert(cert)}
+                role="button"
+                tabIndex={0}
+                aria-label={`View ${cert.name}`}
+              >
+                <div className="about-certs__thumb-wrap">
+                  <Image
+                    src={cert.image}
+                    alt={cert.name}
+                    className="about-certs__thumb"
+                    fallbackText={cert.name}
+                    loading="lazy"
+                  />
+                  <div className="about-certs__thumb-overlay">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="11" cy="11" r="8" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                      <line x1="11" y1="8" x2="11" y2="14" />
+                      <line x1="8" y1="11" x2="14" y2="11" />
+                    </svg>
+                    <span>View Document</span>
+                  </div>
                 </div>
-                <h3 className="about-certs__name">{cert.name}</h3>
-                <p className="about-certs__issuer">{cert.issuer}</p>
-                <span className="about-certs__year">{cert.year}</span>
+
+                <div className="about-certs__body">
+                  <span className="about-certs__tag">{cert.tag}</span>
+                  <h3 className="about-certs__name">{cert.name}</h3>
+                  <p className="about-certs__issuer">{cert.issuer}</p>
+                </div>
               </div>
             ))}
           </div>
         </Container>
       </section>
+
+      {/* Certificate Lightbox Viewer */}
+      {selectedCert && (
+        <div
+          className="about-certs__modal-backdrop"
+          onClick={() => setSelectedCert(null)}
+          role="dialog"
+          aria-label="Certificate Viewer"
+        >
+          <div className="about-certs__modal" onClick={(e) => e.stopPropagation()}>
+            <div className="about-certs__modal-header">
+              <div>
+                <span className="about-certs__modal-tag">{selectedCert.tag}</span>
+                <h3 className="about-certs__modal-title">{selectedCert.name}</h3>
+                <p className="about-certs__modal-issuer">{selectedCert.issuer}</p>
+              </div>
+              <button
+                type="button"
+                className="about-certs__modal-close"
+                onClick={() => setSelectedCert(null)}
+                aria-label="Close document viewer"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="about-certs__modal-body">
+              <Image
+                src={selectedCert.image}
+                alt={selectedCert.name}
+                className="about-certs__modal-image"
+                fallbackText={selectedCert.name}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
+
