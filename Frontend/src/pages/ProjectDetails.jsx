@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router';
 import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
@@ -11,15 +11,54 @@ export default function ProjectDetails() {
   const { slug } = useParams();
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
 
   useEffect(() => {
     setLoading(true);
     fetchProjectBySlug(slug).then((data) => {
       setProject(data);
+      setActiveIndex(0);
       setLoading(false);
     });
   }, [slug]);
+
+  const gallery = project?.gallery || [];
+  const hasMultiple = gallery.length > 1;
+
+  function handlePrev() {
+    setActiveIndex((prev) => (prev > 0 ? prev - 1 : gallery.length - 1));
+  }
+
+  function handleNext() {
+    setActiveIndex((prev) => (prev < gallery.length - 1 ? prev + 1 : 0));
+  }
+
+  function handleTouchStart(e) {
+    touchStartX.current = e.targetTouches[0].clientX;
+    touchEndX.current = null;
+  }
+
+  function handleTouchMove(e) {
+    touchEndX.current = e.targetTouches[0].clientX;
+  }
+
+  function handleTouchEnd() {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+    const diff = touchStartX.current - touchEndX.current;
+    const minSwipe = 40;
+    if (diff > minSwipe) {
+      // Swiped left -> next
+      handleNext();
+    } else if (diff < -minSwipe) {
+      // Swiped right -> prev
+      handlePrev();
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+  }
 
   if (loading) {
     return (
@@ -79,25 +118,110 @@ export default function ProjectDetails() {
           <div className="project-detail__grid">
             {/* Main Content */}
             <div className="project-detail__main">
-              <h2 className="project-detail__section-title">Project Gallery</h2>
-              <div className="project-detail__gallery">
-                {(project.gallery || []).map((img, i) => (
-                  <button
-                    key={i}
-                    className="project-detail__gallery-item"
-                    onClick={() => setLightboxIndex(i)}
-                    aria-label={`View image ${i + 1}`}
+              {gallery.length > 0 && (
+                <div className="project-detail__showcase-wrapper">
+                  <div className="project-detail__gallery-header">
+                    <h2 className="project-detail__section-title">Project Gallery</h2>
+                    {hasMultiple && (
+                      <div className="project-detail__gallery-nav">
+                        <button
+                          type="button"
+                          className="project-detail__gallery-arrow"
+                          onClick={handlePrev}
+                          aria-label="Previous image"
+                        >
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="15 18 9 12 15 6" />
+                          </svg>
+                        </button>
+                        <button
+                          type="button"
+                          className="project-detail__gallery-arrow"
+                          onClick={handleNext}
+                          aria-label="Next image"
+                        >
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="9 18 15 12 9 6" />
+                          </svg>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Showcase Slider Container */}
+                  <div
+                    className="project-detail__slider"
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
                   >
-                    <Image
-                      src={img}
-                      alt={`${project.name} — image ${i + 1}`}
-                      className="project-detail__gallery-image"
-                      fallbackText={`${project.name} #${i + 1}`}
-                      loading="lazy"
-                    />
-                  </button>
-                ))}
-              </div>
+                    <div
+                      className="project-detail__slider-track"
+                      style={
+                        hasMultiple
+                          ? {
+                              transform: `translateX(calc(9% - ${activeIndex} * (82% + var(--space-md))))`,
+                            }
+                          : undefined
+                      }
+                    >
+                      {gallery.map((img, i) => {
+                        const isActive = i === activeIndex;
+                        return (
+                          <div
+                            key={i}
+                            className={`project-detail__slide ${isActive ? 'project-detail__slide--active' : 'project-detail__slide--preview'}`}
+                            onClick={() => {
+                              if (isActive) {
+                                setLightboxIndex(i);
+                              } else {
+                                setActiveIndex(i);
+                              }
+                            }}
+                            role="button"
+                            tabIndex={0}
+                            aria-label={isActive ? `Open image ${i + 1} in viewer` : `View image ${i + 1}`}
+                          >
+                            <Image
+                              src={img}
+                              alt={`${project.name} — image ${i + 1}`}
+                              className="project-detail__slide-image"
+                              fallbackText={`${project.name} #${i + 1}`}
+                              loading={i === 0 ? 'eager' : 'lazy'}
+                            />
+                            {isActive && (
+                              <div className="project-detail__slide-badge">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <circle cx="11" cy="11" r="8" />
+                                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                                  <line x1="11" y1="8" x2="11" y2="14" />
+                                  <line x1="8" y1="11" x2="14" y2="11" />
+                                </svg>
+                                <span>Expand</span>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Indicator Dots */}
+                  {hasMultiple && (
+                    <div className="project-detail__dots">
+                      {gallery.map((_, i) => (
+                        <button
+                          key={i}
+                          type="button"
+                          className={`project-detail__dot ${i === activeIndex ? 'project-detail__dot--active' : ''}`}
+                          onClick={() => setActiveIndex(i)}
+                          aria-label={`Go to slide ${i + 1}`}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
 
               <h2 className="project-detail__section-title">Project Overview</h2>
               <p className="project-detail__text">{project.description}</p>
