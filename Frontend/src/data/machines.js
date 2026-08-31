@@ -22,11 +22,6 @@ const staticMachines = [
     image: machineExcavator,
     description:
       'Heavy-duty hydraulic excavator for earthmoving, grading, and excavation work.',
-    specifications: [
-      { label: 'Operating Weight', value: '[CLIENT TO PROVIDE]' },
-      { label: 'Engine Power', value: '[CLIENT TO PROVIDE]' },
-    ],
-    specs: {},
   },
   {
     id: 'static-2',
@@ -39,11 +34,6 @@ const staticMachines = [
     image: machineBulldozer,
     description:
       'Powerful track-type bulldozer for land clearing, grading, and heavy push operations.',
-    specifications: [
-      { label: 'Operating Weight', value: '[CLIENT TO PROVIDE]' },
-      { label: 'Engine Power', value: '[CLIENT TO PROVIDE]' },
-    ],
-    specs: {},
   },
   {
     id: 'static-3',
@@ -56,30 +46,20 @@ const staticMachines = [
     image: machineCrane,
     description:
       'High-capacity mobile crane for structural steel, precast concrete, and heavy lifting.',
-    specifications: [
-      { label: 'Max Lifting Capacity', value: '[CLIENT TO PROVIDE]' },
-      { label: 'Max Boom Length', value: '[CLIENT TO PROVIDE]' },
-    ],
-    specs: {},
   },
 ];
 
 /* ── Normalize Supabase row → frontend shape ──────────────── */
 function normalize(row) {
-  // Convert specs JSONB to specifications array format for compatibility
-  const specifications = row.specs && typeof row.specs === 'object'
-    ? Object.entries(row.specs).map(([label, value]) => ({ label, value: String(value) }))
-    : [];
-
   return {
     ...row,
-    specifications,
   };
 }
 
 /* ── Async Fetchers (Supabase) ────────────────────────────── */
 
 export async function fetchMachines() {
+  if (!supabase) return staticMachines;
   try {
     const { data, error } = await supabase
       .from('machines')
@@ -95,6 +75,7 @@ export async function fetchMachines() {
 }
 
 export async function fetchMachineBySlug(slug) {
+  if (!supabase) return staticMachines.find((m) => m.slug === slug) || null;
   try {
     const { data, error } = await supabase
       .from('machines')
@@ -113,6 +94,7 @@ export async function fetchMachineBySlug(slug) {
 }
 
 export async function fetchMachineCategories() {
+  if (!supabase) return [...new Set(staticMachines.map((m) => m.category))];
   try {
     const { data, error } = await supabase
       .from('machines')

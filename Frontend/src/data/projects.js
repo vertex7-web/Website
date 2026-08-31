@@ -63,6 +63,7 @@ function normalize(row) {
 /* ── Async Fetchers (Supabase) ────────────────────────────── */
 
 export async function fetchProjects() {
+  if (!supabase) return staticProjects;
   try {
     const { data, error } = await supabase
       .from('projects')
@@ -78,6 +79,7 @@ export async function fetchProjects() {
 }
 
 export async function fetchProjectBySlug(slug) {
+  if (!supabase) return staticProjects.find((p) => p.slug === slug) || null;
   try {
     const { data, error } = await supabase
       .from('projects')

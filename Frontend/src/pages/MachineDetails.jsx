@@ -47,9 +47,6 @@ export default function MachineDetails() {
     );
   }
 
-  // Support both specs formats: array (static) and JSONB (Supabase)
-  const specifications = machine.specifications || [];
-
   return (
     <>
       <PageHero
@@ -105,22 +102,6 @@ export default function MachineDetails() {
 
               <h2 className="machine-detail__section-title">Description</h2>
               <p className="machine-detail__description">{machine.description}</p>
-
-              {specifications.length > 0 && (
-                <>
-                  <h2 className="machine-detail__section-title">Specifications</h2>
-                  <table className="machine-detail__specs" aria-label="Equipment specifications">
-                    <tbody>
-                      {specifications.map((spec) => (
-                        <tr key={spec.label} className="machine-detail__spec-row">
-                          <td className="machine-detail__spec-label">{spec.label}</td>
-                          <td className="machine-detail__spec-value">{spec.value}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </>
-              )}
 
               <div className="machine-detail__cta">
                 <Button to="/quote" variant="primary" size="lg">

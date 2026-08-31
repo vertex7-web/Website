@@ -169,34 +169,6 @@
   margin-bottom: var(--space-2xl);
 }
 
-/* Specs Table */
-.machine-detail__specs {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: var(--space-2xl);
-}
-
-.machine-detail__spec-row {
-  border-bottom: 1px solid var(--color-border);
-}
-
-.machine-detail__spec-label,
-.machine-detail__spec-value {
-  padding: var(--space-md) 0;
-  font-size: var(--text-base);
-}
-
-.machine-detail__spec-label {
-  color: var(--color-muted);
-  width: 50%;
-}
-
-.machine-detail__spec-value {
-  color: var(--color-white);
-  font-weight: 500;
-  text-align: right;
-}
-
 .machine-detail__cta {
   margin-top: var(--space-xl);
 }
