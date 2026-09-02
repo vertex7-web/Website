@@ -7,6 +7,7 @@ import aboutImg from '../assets/about-preview.jpg';
 import bir2303Img from '../assets/BIR 2303.jpg';
 import businessPermitImg from '../assets/Business permit.jpg';
 import dtiImg from '../assets/DTI.jpg';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 import './About.css';
 
 const certifications = [
@@ -32,6 +33,11 @@ const certifications = [
 
 export default function About() {
   const [selectedCert, setSelectedCert] = useState(null);
+
+  useDocumentMeta({
+    title: 'About Us | Vertex 7',
+    description: 'Learn about Vertex 7\'s story, vision, mission, and commitment to quality in heavy equipment rentals and construction supplies in Bulacan, Philippines.',
+  });
 
   return (
     <>

@@ -5,6 +5,7 @@ import Container from '../components/ui/Container';
 import Button from '../components/ui/Button';
 import Image from '../components/ui/Image';
 import { fetchProjectBySlug } from '../data/projects';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 import './ProjectDetails.css';
 
 export default function ProjectDetails() {
@@ -15,6 +16,13 @@ export default function ProjectDetails() {
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
+
+  useDocumentMeta({
+    title: project ? `${project.title} | Vertex 7 Projects` : 'Loading... | Vertex 7',
+    description: project
+      ? `View the ${project.title} project by Vertex 7. ${project.description || 'Construction project in Bulacan, Philippines.'}`
+      : 'Project details — Vertex 7',
+  });
 
   useEffect(() => {
     setLoading(true);

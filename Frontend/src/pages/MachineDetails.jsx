@@ -5,12 +5,20 @@ import Container from '../components/ui/Container';
 import Button from '../components/ui/Button';
 import Image from '../components/ui/Image';
 import { fetchMachineBySlug } from '../data/machines';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 import './MachineDetails.css';
 
 export default function MachineDetails() {
   const { slug } = useParams();
   const [machine, setMachine] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  useDocumentMeta({
+    title: machine ? `${machine.name} | Vertex 7` : 'Loading... | Vertex 7',
+    description: machine
+      ? `Rent the ${machine.name} from Vertex 7. ${machine.description || 'Heavy equipment rental in Bulacan, Philippines.'}`
+      : 'Heavy equipment details — Vertex 7',
+  });
 
   useEffect(() => {
     setLoading(true);

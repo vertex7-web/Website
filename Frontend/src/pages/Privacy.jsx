@@ -1,10 +1,16 @@
 import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import { Link } from 'react-router';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 import './Terms.css'; // Shared sleek legal page styles
 
 export default function Privacy() {
   const lastUpdated = 'February 2026';
+
+  useDocumentMeta({
+    title: 'Privacy Policy | Vertex 7',
+    description: 'Read how Vertex 7 collects, uses, and protects your personal information.',
+  });
 
   return (
     <>

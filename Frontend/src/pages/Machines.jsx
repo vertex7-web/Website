@@ -4,6 +4,7 @@ import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import Image from '../components/ui/Image';
 import { fetchMachines, fetchMachineCategories, getMachines, getMachineCategories } from '../data/machines';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 import './Machines.css';
 
 export default function Machines() {
@@ -11,6 +12,11 @@ export default function Machines() {
   const [categories, setCategories] = useState(getMachineCategories());
   const [activeCategory, setActiveCategory] = useState('All');
   const [loading, setLoading] = useState(true);
+
+  useDocumentMeta({
+    title: 'Machineries | Vertex 7',
+    description: 'Browse Vertex 7\'s fleet of heavy equipment available for rent — excavators, backhoes, dump trucks, and more in Bulacan, Philippines.',
+  });
 
   useEffect(() => {
     Promise.all([fetchMachines(), fetchMachineCategories()]).then(

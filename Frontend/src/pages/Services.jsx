@@ -5,11 +5,17 @@ import Container from '../components/ui/Container';
 import Button from '../components/ui/Button';
 import Image from '../components/ui/Image';
 import { fetchServices, getServices } from '../data/services';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 import './Services.css';
 
 export default function Services() {
   const [services, setServices] = useState(getServices());
   const location = useLocation();
+
+  useDocumentMeta({
+    title: 'Services | Vertex 7',
+    description: 'Explore Vertex 7\'s range of construction services including equipment rental, hauling, and materials supply in Bulacan, Philippines.',
+  });
 
   useEffect(() => {
     fetchServices().then((data) => setServices(data));
