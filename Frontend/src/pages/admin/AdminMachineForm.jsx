@@ -16,24 +16,8 @@ const BLANK = {
   category: '',
   image: '',
   description: '',
-  specs: {},
   published: true,
 };
-
-// Helper to manage specs as key-value pairs
-function specsToArray(specs) {
-  if (!specs || typeof specs !== 'object') return [{ key: '', value: '' }];
-  const entries = Object.entries(specs);
-  return entries.length ? entries.map(([key, value]) => ({ key, value: String(value) })) : [{ key: '', value: '' }];
-}
-
-function arrayToSpecs(arr) {
-  const obj = {};
-  arr.forEach(({ key, value }) => {
-    if (key.trim()) obj[key.trim()] = value.trim();
-  });
-  return obj;
-}
 
 export default function AdminMachineForm() {
   const { id } = useParams();
@@ -41,7 +25,6 @@ export default function AdminMachineForm() {
   const isEdit = Boolean(id);
 
   const [form, setForm] = useState(BLANK);
-  const [specRows, setSpecRows] = useState([{ key: '', value: '' }]);
   const [loading, setLoading] = useState(isEdit);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -54,7 +37,6 @@ export default function AdminMachineForm() {
           setError('Machinery not found.');
         } else {
           setForm(data);
-          setSpecRows(specsToArray(data.specs));
         }
         setLoading(false);
       });
@@ -67,14 +49,6 @@ export default function AdminMachineForm() {
       [name]: type === 'checkbox' ? checked : value,
       ...(name === 'name' && !isEdit ? { slug: slugify(value) } : {}),
     }));
-  }
-
-  function handleSpecChange(index, field, value) {
-    setSpecRows((prev) => {
-      const next = [...prev];
-      next[index] = { ...next[index], [field]: value };
-      return next;
-    });
   }
 
   async function handleSubmit(e) {
@@ -91,7 +65,6 @@ export default function AdminMachineForm() {
       category: form.category.trim(),
       image: form.image,
       description: form.description.trim(),
-      specs: arrayToSpecs(specRows),
       published: form.published,
     };
 
@@ -161,49 +134,14 @@ export default function AdminMachineForm() {
         </div>
 
         <div className="admin-form__section">
-          <h3 className="admin-form__section-title">Specifications</h3>
-          <div className="admin-array-field">
-            {specRows.map((row, i) => (
-              <div key={i} className="admin-array-field__row">
-                <input
-                  value={row.key}
-                  onChange={(e) => handleSpecChange(i, 'key', e.target.value)}
-                  className="admin-form__input"
-                  placeholder="Spec name (e.g. Weight)"
-                  style={{ flex: 1 }}
-                />
-                <input
-                  value={row.value}
-                  onChange={(e) => handleSpecChange(i, 'value', e.target.value)}
-                  className="admin-form__input"
-                  placeholder="Value (e.g. 22,000 kg)"
-                  style={{ flex: 1 }}
-                />
-                <button
-                  type="button"
-                  className="admin-array-field__remove"
-                  onClick={() => setSpecRows((prev) => prev.filter((_, j) => j !== i))}
-                >
-                  ✕
-                </button>
-              </div>
-            ))}
-            <button
-              type="button"
-              className="admin-array-field__add"
-              onClick={() => setSpecRows((prev) => [...prev, { key: '', value: '' }])}
-            >
-              + Add Spec
-            </button>
-          </div>
-        </div>
-
-        <div className="admin-form__section">
-          <h3 className="admin-form__section-title">Image</h3>
+          <h3 className="admin-form__section-title">Machinery Image</h3>
           <ImageUpload
             folder="machines"
             value={form.image}
             onChange={(url) => setForm((prev) => ({ ...prev, image: url }))}
+            enableCrop={true}
+            defaultAspect="16:10"
+            label="Upload Machinery Image"
           />
         </div>
 

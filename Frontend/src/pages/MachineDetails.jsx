@@ -5,12 +5,20 @@ import Container from '../components/ui/Container';
 import Button from '../components/ui/Button';
 import Image from '../components/ui/Image';
 import { fetchMachineBySlug } from '../data/machines';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 import './MachineDetails.css';
 
 export default function MachineDetails() {
   const { slug } = useParams();
   const [machine, setMachine] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  useDocumentMeta({
+    title: machine ? `${machine.name} | Vertex 7` : 'Loading... | Vertex 7',
+    description: machine
+      ? `Rent the ${machine.name} from Vertex 7. ${machine.description || 'Heavy equipment rental in Bulacan, Philippines.'}`
+      : 'Heavy equipment details — Vertex 7',
+  });
 
   useEffect(() => {
     setLoading(true);
@@ -46,9 +54,6 @@ export default function MachineDetails() {
       </>
     );
   }
-
-  // Support both specs formats: array (static) and JSONB (Supabase)
-  const specifications = machine.specifications || [];
 
   return (
     <>
@@ -105,22 +110,6 @@ export default function MachineDetails() {
 
               <h2 className="machine-detail__section-title">Description</h2>
               <p className="machine-detail__description">{machine.description}</p>
-
-              {specifications.length > 0 && (
-                <>
-                  <h2 className="machine-detail__section-title">Specifications</h2>
-                  <table className="machine-detail__specs" aria-label="Equipment specifications">
-                    <tbody>
-                      {specifications.map((spec) => (
-                        <tr key={spec.label} className="machine-detail__spec-row">
-                          <td className="machine-detail__spec-label">{spec.label}</td>
-                          <td className="machine-detail__spec-value">{spec.value}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </>
-              )}
 
               <div className="machine-detail__cta">
                 <Button to="/quote" variant="primary" size="lg">

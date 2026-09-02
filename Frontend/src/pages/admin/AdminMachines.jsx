@@ -64,7 +64,7 @@ export default function AdminMachines() {
           <tbody>
             {machines.map((m) => (
               <tr key={m.id}>
-                <td>
+                <td className="admin-table__cell-thumb">
                   <Image
                     src={m.image}
                     alt={m.name}
@@ -74,10 +74,10 @@ export default function AdminMachines() {
                     showFallbackIcon={false}
                   />
                 </td>
-                <td style={{ color: '#fff', fontWeight: 500 }}>{m.name}</td>
-                <td>{m.brand} {m.model}</td>
-                <td>{m.category || '—'}</td>
-                <td>
+                <td className="admin-table__cell-name">{m.name}</td>
+                <td className="admin-table__cell-subtitle">{m.brand} {m.model}</td>
+                <td className="admin-table__cell-category">{m.category || 'General'}</td>
+                <td className="admin-table__cell-status">
                   <button
                     className={`admin-badge ${m.published ? 'admin-badge--published' : 'admin-badge--draft'}`}
                     onClick={() => handleTogglePublish(m)}
@@ -86,7 +86,7 @@ export default function AdminMachines() {
                     {m.published ? '● Published' : '○ Draft'}
                   </button>
                 </td>
-                <td>
+                <td className="admin-table__cell-actions">
                   <div className="admin-table__actions">
                     <Link
                       to={`/admin/machines/${m.id}/edit`}

@@ -1,9 +1,15 @@
 import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import QuoteForm from '../components/ui/QuoteForm';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 import './Quote.css';
 
 export default function Quote() {
+  useDocumentMeta({
+    title: 'Request a Quote | Vertex 7',
+    description: 'Request a free quote from Vertex 7 for heavy equipment rental and construction supplies in Bulacan, Philippines.',
+  });
+
   return (
     <>
       <section className="quote-page" id="quote-form">

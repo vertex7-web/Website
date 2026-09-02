@@ -181,11 +181,14 @@ export default function AdminServiceForm() {
         </div>
 
         <div className="admin-form__section">
-          <h3 className="admin-form__section-title">Image</h3>
+          <h3 className="admin-form__section-title">Service Cover Image</h3>
           <ImageUpload
             folder="services"
             value={form.image}
             onChange={(url) => setForm((prev) => ({ ...prev, image: url }))}
+            enableCrop={true}
+            defaultAspect="16:10"
+            label="Upload Service Cover Image"
           />
         </div>
 

@@ -1,10 +1,16 @@
 import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import { Link } from 'react-router';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 import './Terms.css';
 
 export default function Terms() {
   const lastUpdated = 'February 2026';
+
+  useDocumentMeta({
+    title: 'Terms of Service | Vertex 7',
+    description: 'Read the terms and conditions for using Vertex 7\'s website and services.',
+  });
 
   return (
     <>

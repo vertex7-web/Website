@@ -6,8 +6,14 @@ import MachinesPreview from '../components/home/MachinesPreview';
 import FeaturedProjects from '../components/home/FeaturedProjects';
 import WhyChooseUs from '../components/home/WhyChooseUs';
 import FinalCTA from '../components/home/FinalCTA';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 
 export default function Home() {
+  useDocumentMeta({
+    title: 'Vertex 7 | Heavy Equipment Rentals & Construction Supplies',
+    description: 'Vertex 7 — Heavy Equipment Rentals & Construction Supplies. Reliable machinery, professional service, and trusted partnerships for your construction projects.',
+  });
+
   return (
     <>
       {/* 1. Hero — Full-width photography */}

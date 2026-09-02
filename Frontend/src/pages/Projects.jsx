@@ -4,11 +4,17 @@ import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import Image from '../components/ui/Image';
 import { fetchProjects, getProjects } from '../data/projects';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 import './Projects.css';
 
 export default function Projects() {
   const [projects, setProjects] = useState(getProjects());
   const [loading, setLoading] = useState(true);
+
+  useDocumentMeta({
+    title: 'Projects | Vertex 7',
+    description: 'View Vertex 7\'s completed and ongoing construction projects across Bulacan and surrounding regions.',
+  });
 
   useEffect(() => {
     fetchProjects().then((data) => {

@@ -138,6 +138,7 @@ function normalize(row) {
 /* ── Async Fetchers (Supabase) ────────────────────────────── */
 
 export async function fetchServices() {
+  if (!supabase) return staticServices;
   try {
     const { data, error } = await supabase
       .from('services')
@@ -153,6 +154,7 @@ export async function fetchServices() {
 }
 
 export async function fetchServiceBySlug(slug) {
+  if (!supabase) return staticServices.find((s) => s.slug === slug) || null;
   try {
     const { data, error } = await supabase
       .from('services')

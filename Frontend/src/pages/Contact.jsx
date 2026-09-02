@@ -1,9 +1,15 @@
 import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import Button from '../components/ui/Button';
+import useDocumentMeta from '../hooks/useDocumentMeta';
 import './Contact.css';
 
 export default function Contact() {
+  useDocumentMeta({
+    title: 'Contact Us | Vertex 7',
+    description: 'Get in touch with Vertex 7 for heavy equipment rentals, quotes, and construction supply inquiries in Bulacan, Philippines.',
+  });
+
   return (
     <>
       <PageHero
