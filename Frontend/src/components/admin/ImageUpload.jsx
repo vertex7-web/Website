@@ -287,7 +287,7 @@ export default function ImageUpload({
               </div>
               <span className="image-upload__primary-text">{label}</span>
               <span className="image-upload__sub-text">
-                {enableCrop ? 'Click to browse or drop file • Cropping tool included' : 'Drag and drop or browse files'}
+                {enableCrop ? 'Click to browse or drop file' : 'Drag and drop or browse files'}
               </span>
             </>
           )}
