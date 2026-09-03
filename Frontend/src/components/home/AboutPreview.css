@@ -1,15 +1,40 @@
 /* ── About Preview ───────────────────────────────────────── */
 
 .about-preview {
-  background-color: var(--color-off-white);
+  background-color: var(--color-black);
   padding: var(--section-pad-y) 0;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
   position: relative;
   min-height: 560px;
   display: flex;
   align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.about-preview__bg-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.about-preview__bg-img {
+  position: absolute;
+  top: -20%;
+  left: 0;
+  width: 100%;
+  height: 140%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
 }
 
 .about-preview__overlay {

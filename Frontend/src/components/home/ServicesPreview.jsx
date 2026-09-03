@@ -64,10 +64,10 @@ export default function ServicesPreview() {
         />
 
         <div className="services-preview__grid">
-          {SERVICES.map((service) => (
+          {SERVICES.map((service, index) => (
             <Link
               to={`/services#${service.slug}`}
-              className="service-card"
+              className={`service-card reveal-slide-up delay-${Math.min(index + 1, 5)}`}
               key={service.slug}
             >
               <div className="service-card__icon" aria-hidden="true">

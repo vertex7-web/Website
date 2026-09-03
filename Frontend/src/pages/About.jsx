@@ -52,7 +52,7 @@ export default function About() {
       {/* Company Story */}
       <section className="about-story" id="company-story">
         <Container className="about-story__grid">
-          <div className="about-story__content">
+          <div className="about-story__content reveal-slide-up">
             <SectionHeading
               eyebrow="Our Story"
               title="Built from the Ground Up"
@@ -81,7 +81,7 @@ export default function About() {
               trust.
             </p>
           </div>
-          <div className="about-story__image-wrap">
+          <div className="about-story__image-wrap reveal-slide-up delay-2">
             <Image
               src={aboutImg}
               alt="Vertex 7 team at a construction site"
@@ -97,7 +97,7 @@ export default function About() {
       <section className="about-vm" id="vision-mission">
         <Container>
           <div className="about-vm__grid">
-            <div className="about-vm__card">
+            <div className="about-vm__card reveal-slide-up delay-1">
               <span className="about-vm__label">Vision</span>
               <h3 className="about-vm__title">
                 To be a trusted and dependable partner in the construction industry
@@ -112,7 +112,7 @@ export default function About() {
               </p>
             </div>
             <div className="about-vm__divider" aria-hidden="true" />
-            <div className="about-vm__card">
+            <div className="about-vm__card reveal-slide-up delay-2">
               <span className="about-vm__label">Mission</span>
               <ul className="about-vm__list">
                 <li className="about-vm__item">
@@ -143,8 +143,11 @@ export default function About() {
           <SectionHeading eyebrow="Coverage" title="Areas We Serve" light />
           <div className="about-areas__grid">
             {['[Region 1]', '[Region 2]', '[Region 3]', '[Region 4]', '[Region 5]', '[Region 6]'].map(
-              (area) => (
-                <div className="about-areas__card" key={area}>
+              (area, index) => (
+                <div
+                  className={`about-areas__card reveal-slide-up delay-${Math.min((index % 3) + 1, 5)}`}
+                  key={area}
+                >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                     <circle cx="12" cy="10" r="3" />
@@ -171,7 +174,7 @@ export default function About() {
           <div className="about-certs__grid">
             {certifications.map((cert, i) => (
               <div
-                className="about-certs__card"
+                className={`about-certs__card reveal-slide-up delay-${Math.min(i + 1, 5)}`}
                 key={i}
                 onClick={() => setSelectedCert(cert)}
                 role="button"

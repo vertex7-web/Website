@@ -270,15 +270,71 @@ select {
   border-width: 0;
 }
 
-/* ── Fade-in Animation ──────────────────────────────────── */
+/* ── Text Slide & Scroll Reveal Animations ──────────────── */
 
-.fade-in-up {
+/* Base state: subtle translate down and invisible */
+.reveal-slide-up {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translate3d(0, 28px, 0);
+  -webkit-transform: translate3d(0, 28px, 0);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
-.fade-in-up.visible {
-  opacity: 1;
-  transform: translateY(0);
+.reveal-slide-left {
+  opacity: 0;
+  transform: translate3d(-32px, 0, 0);
+  -webkit-transform: translate3d(-32px, 0, 0);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
+
+.reveal-slide-right {
+  opacity: 0;
+  transform: translate3d(32px, 0, 0);
+  -webkit-transform: translate3d(32px, 0, 0);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Revealed active state */
+.reveal-slide-up.is-revealed,
+.reveal-slide-left.is-revealed,
+.reveal-slide-right.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+/* Stagger Delays for Hierarchical Flow */
+.delay-1 { transition-delay: 90ms; animation-delay: 90ms; }
+.delay-2 { transition-delay: 180ms; animation-delay: 180ms; }
+.delay-3 { transition-delay: 270ms; animation-delay: 270ms; }
+.delay-4 { transition-delay: 360ms; animation-delay: 360ms; }
+.delay-5 { transition-delay: 450ms; animation-delay: 450ms; }
+
+/* Immediate Text Slide-Up Animation (e.g. Hero on page load) */
+@keyframes v7TextSlideUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-slide-up {
+  animation: v7TextSlideUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+}

@@ -60,9 +60,11 @@ function normalize(row) {
   };
 }
 
-/* ── Async Fetchers (Supabase) ────────────────────────────── */
+/* ── In-Memory Cache ──────────────────────────────────────── */
+let projectsCache = null;
 
 export async function fetchProjects() {
+  if (projectsCache) return projectsCache;
   if (!supabase) return staticProjects;
   try {
     const { data, error } = await supabase
@@ -72,7 +74,8 @@ export async function fetchProjects() {
       .order('created_at', { ascending: false });
 
     if (error || !data?.length) return staticProjects;
-    return data.map(normalize);
+    projectsCache = data.map(normalize);
+    return projectsCache;
   } catch {
     return staticProjects;
   }
@@ -100,7 +103,7 @@ export async function fetchProjectBySlug(slug) {
 /* ── Sync Getters (static fallback — used by components not yet migrated) */
 
 export function getProjects() {
-  return staticProjects;
+  return projectsCache || staticProjects;
 }
 
 export function getProjectBySlug(slug) {

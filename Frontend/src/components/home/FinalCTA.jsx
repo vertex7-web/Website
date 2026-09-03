@@ -6,13 +6,13 @@ export default function FinalCTA() {
   return (
     <section className="final-cta" id="final-cta">
       <Container className="final-cta__content">
-        <span className="final-cta__eyebrow">Get Started</span>
-        <h2 className="final-cta__title">Ready to Build?</h2>
-        <p className="final-cta__description">
+        <span className="final-cta__eyebrow reveal-slide-up">Get Started</span>
+        <h2 className="final-cta__title reveal-slide-up delay-1">Ready to Build?</h2>
+        <p className="final-cta__description reveal-slide-up delay-2">
           Let's discuss your next project. Whether you need equipment, supplies,
           or professional support — we're here to help.
         </p>
-        <div className="final-cta__actions">
+        <div className="final-cta__actions reveal-slide-up delay-3">
           <Button to="/contact" variant="primary" size="lg">
             Contact Us
           </Button>

@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router';
 import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import Button from '../components/ui/Button';
 import Image from '../components/ui/Image';
 import { fetchServices, getServices } from '../data/services';
+import heroServicesImg from '../assets/hero-services.jpg';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import './Services.css';
 
 export default function Services() {
   const [services, setServices] = useState(getServices());
   const location = useLocation();
+  const hasScrolledRef = useRef(false);
 
   useDocumentMeta({
     title: 'Services | Vertex 7',
@@ -18,19 +20,22 @@ export default function Services() {
   });
 
   useEffect(() => {
-    fetchServices().then((data) => setServices(data));
+    fetchServices().then((data) => {
+      setServices(data);
+    });
   }, []);
 
-  // Smooth scroll to the targeted service section if a hash is present
+  // Smooth scroll to the targeted service section ONCE if a hash is present
   useEffect(() => {
-    if (location.hash) {
+    if (location.hash && !hasScrolledRef.current) {
       const targetId = location.hash.replace('#', '');
       const element = document.getElementById(targetId);
       if (element) {
-        // Small delay to ensure layout and images are settled
-        requestAnimationFrame(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
-        });
+        hasScrolledRef.current = true;
+        const timer = setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+        return () => clearTimeout(timer);
       }
     }
   }, [location.hash, services]);
@@ -41,14 +46,15 @@ export default function Services() {
         eyebrow="What We Offer"
         title="Our Services"
         subtitle="From equipment rental to on-site support — comprehensive services built for the field."
+        backgroundImage={heroServicesImg}
       />
 
       <section className="services-page" id="services-directory">
         <Container>
           {services.map((service, index) => (
             <article
-              className={`services-page__item ${index % 2 !== 0 ? 'services-page__item--reversed' : ''}`}
-              key={service.id}
+              className={`services-page__item reveal-slide-up ${index % 2 !== 0 ? 'services-page__item--reversed' : ''}`}
+              key={service.id || service.slug || index}
               id={service.slug}
             >
               {/* Image */}

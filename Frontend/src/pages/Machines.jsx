@@ -4,6 +4,7 @@ import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import Image from '../components/ui/Image';
 import { fetchMachines, fetchMachineCategories, getMachines, getMachineCategories } from '../data/machines';
+import heroMachinesImg from '../assets/hero-machines.jpg';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import './Machines.css';
 
@@ -39,13 +40,14 @@ export default function Machines() {
         eyebrow="Our Fleet"
         title="Heavy Equipment"
         subtitle="Browse our equipment catalog. Every machinery is serviced, inspected, and ready for your project."
+        backgroundImage={heroMachinesImg}
       />
 
       <section className="machines-page" id="machines-catalog">
         <Container>
           {/* Category Filter */}
           {categories.length > 1 && (
-            <div className="machines-page__filters" role="group" aria-label="Filter by category">
+            <div className="machines-page__filters reveal-slide-up" role="group" aria-label="Filter by category">
               <button
                 className={`machines-page__filter-btn ${activeCategory === 'All' ? 'machines-page__filter-btn--active' : ''}`}
                 onClick={() => setActiveCategory('All')}
@@ -66,10 +68,10 @@ export default function Machines() {
 
           {/* Machine Grid */}
           <div className="machines-page__grid">
-            {filtered.map((machine) => (
+            {filtered.map((machine, index) => (
               <Link
                 to={`/machineries/${machine.slug}`}
-                className="machines-page__card"
+                className={`machines-page__card reveal-slide-up delay-${Math.min((index % 3) + 1, 5)}`}
                 key={machine.id}
               >
                 <div className="machines-page__card-image-wrap">

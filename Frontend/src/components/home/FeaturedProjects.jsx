@@ -28,7 +28,7 @@ export default function FeaturedProjects() {
           {projects.map((project, index) => (
             <Link
               to={`/projects/${project.slug}`}
-              className={`project-card ${index === 0 ? 'project-card--featured' : ''}`}
+              className={`project-card reveal-slide-up delay-${Math.min(index + 1, 5)} ${index === 0 ? 'project-card--featured' : ''}`}
               key={project.id || project.slug}
             >
               <Image

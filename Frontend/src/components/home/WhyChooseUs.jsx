@@ -1,5 +1,6 @@
 import Container from '../ui/Container';
 import whyImg from '../../assets/why-choose-us.jpg';
+import useParallax from '../../hooks/useParallax';
 import './WhyChooseUs.css';
 
 /* ── Placeholder value propositions ──────────────────────────
@@ -25,26 +26,36 @@ const POINTS = [
 ];
 
 export default function WhyChooseUs() {
-  return (
-    <section className="why-choose" id="why-choose-us"
-    style={{ backgroundImage: `url(${whyImg})` }}
-    >
-      <div className="why-choose__overlay" aria-hidden="true" />
-      <Container className="why-choose__grid">
-        {/* Image Column */}
-        
+  const { containerRef, targetRef, textRef } = useParallax({
+    speed: 0.22,
+    textSpeed: -0.05,
+  });
 
+  return (
+    <section className="why-choose" id="why-choose-us" ref={containerRef}>
+      <div className="why-choose__bg-wrap" aria-hidden="true">
+        <div
+          ref={targetRef}
+          className="why-choose__bg-img"
+          style={{ backgroundImage: `url(${whyImg})` }}
+        />
+        <div className="why-choose__overlay" />
+      </div>
+      <Container className="why-choose__grid" ref={textRef}>
         {/* Content Column */}
         <div className="why-choose__content">
-          <span className="why-choose__eyebrow">Why Vertex 7</span>
-          <h2 className="why-choose__title">
+          <span className="why-choose__eyebrow reveal-slide-up">Why Vertex 7</span>
+          <h2 className="why-choose__title reveal-slide-up delay-1">
             Built on Reliability.<br />
             Driven by Results.
           </h2>
 
           <ul className="why-choose__list">
-            {POINTS.map((point) => (
-              <li className="why-choose__item" key={point.title}>
+            {POINTS.map((point, index) => (
+              <li
+                className={`why-choose__item reveal-slide-up delay-${Math.min(index + 1, 5)}`}
+                key={point.title}
+              >
                 <span className="why-choose__bullet" aria-hidden="true" />
                 <div>
                   <h3 className="why-choose__item-title">{point.title}</h3>

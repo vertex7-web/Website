@@ -56,9 +56,11 @@ function normalize(row) {
   };
 }
 
-/* ── Async Fetchers (Supabase) ────────────────────────────── */
+/* ── In-Memory Cache ──────────────────────────────────────── */
+let machinesCache = null;
 
 export async function fetchMachines() {
+  if (machinesCache) return machinesCache;
   if (!supabase) return staticMachines;
   try {
     const { data, error } = await supabase
@@ -68,7 +70,8 @@ export async function fetchMachines() {
       .order('created_at', { ascending: false });
 
     if (error || !data?.length) return staticMachines;
-    return data.map(normalize);
+    machinesCache = data.map(normalize);
+    return machinesCache;
   } catch {
     return staticMachines;
   }
@@ -113,7 +116,7 @@ export async function fetchMachineCategories() {
 /* ── Sync Getters (static fallback) ───────────────────────── */
 
 export function getMachines() {
-  return staticMachines;
+  return machinesCache || staticMachines;
 }
 
 export function getMachineBySlug(slug) {

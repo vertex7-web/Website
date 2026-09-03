@@ -135,9 +135,11 @@ function normalize(row) {
   };
 }
 
-/* ── Async Fetchers (Supabase) ────────────────────────────── */
+/* ── In-Memory Cache ──────────────────────────────────────── */
+let servicesCache = null;
 
 export async function fetchServices() {
+  if (servicesCache) return servicesCache;
   if (!supabase) return staticServices;
   try {
     const { data, error } = await supabase
@@ -147,7 +149,8 @@ export async function fetchServices() {
       .order('number', { ascending: true });
 
     if (error || !data?.length) return staticServices;
-    return data.map(normalize);
+    servicesCache = data.map(normalize);
+    return servicesCache;
   } catch {
     return staticServices;
   }
@@ -174,11 +177,19 @@ export async function fetchServiceBySlug(slug) {
 
 /* ── Sync Getters (static fallback) ───────────────────────── */
 
+export function getCachedServices() {
+  return servicesCache;
+}
+
 export function getServices() {
-  return staticServices;
+  return servicesCache || staticServices;
 }
 
 export function getServiceBySlug(slug) {
+  if (servicesCache) {
+    const found = servicesCache.find((s) => s.slug === slug);
+    if (found) return found;
+  }
   return staticServices.find((s) => s.slug === slug) || null;
 }
 

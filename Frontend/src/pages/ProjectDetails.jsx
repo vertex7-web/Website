@@ -18,9 +18,9 @@ export default function ProjectDetails() {
   const touchEndX = useRef(null);
 
   useDocumentMeta({
-    title: project ? `${project.title} | Vertex 7 Projects` : 'Loading... | Vertex 7',
+    title: project ? `${project.name} | Vertex 7 Projects` : 'Loading... | Vertex 7',
     description: project
-      ? `View the ${project.title} project by Vertex 7. ${project.description || 'Construction project in Bulacan, Philippines.'}`
+      ? `View the ${project.name} project by Vertex 7. ${project.description || 'Construction project in Bulacan, Philippines.'}`
       : 'Project details — Vertex 7',
   });
 
@@ -58,10 +58,8 @@ export default function ProjectDetails() {
     const diff = touchStartX.current - touchEndX.current;
     const minSwipe = 40;
     if (diff > minSwipe) {
-      // Swiped left -> next
       handleNext();
     } else if (diff < -minSwipe) {
-      // Swiped right -> prev
       handlePrev();
     }
     touchStartX.current = null;
@@ -98,15 +96,24 @@ export default function ProjectDetails() {
   return (
     <>
       <PageHero
-        eyebrow={project.category}
+        eyebrow={project.category || 'Project'}
         title={project.name}
-        subtitle={project.location}
         backgroundImage={project.coverImage || project.cover_image}
-      />
+      >
+        {project.location && (
+          <p className="page-hero__location">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            {project.location}
+          </p>
+        )}
+      </PageHero>
 
       <section className="project-detail" id="project-detail">
         <Container>
-          {/* Navigation Bar: Back Button & Breadcrumbs */}
+          {/* Navigation Bar */}
           <div className="project-detail__nav-bar">
             <Link to="/projects" className="project-detail__back-btn" aria-label="Back to Projects">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -123,161 +130,146 @@ export default function ProjectDetails() {
             </nav>
           </div>
 
-          <div className="project-detail__grid">
-            {/* Main Content */}
-            <div className="project-detail__main">
-              {gallery.length > 0 && (
-                <div className="project-detail__showcase-wrapper">
-                  <div className="project-detail__gallery-header">
-                    <h2 className="project-detail__section-title">Project Gallery</h2>
-                    {hasMultiple && (
-                      <div className="project-detail__gallery-nav">
-                        <button
-                          type="button"
-                          className="project-detail__gallery-arrow"
-                          onClick={handlePrev}
-                          aria-label="Previous image"
-                        >
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <polyline points="15 18 9 12 15 6" />
-                          </svg>
-                        </button>
-                        <button
-                          type="button"
-                          className="project-detail__gallery-arrow"
-                          onClick={handleNext}
-                          aria-label="Next image"
-                        >
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <polyline points="9 18 15 12 9 6" />
-                          </svg>
-                        </button>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Showcase Slider Container */}
-                  <div
-                    className="project-detail__slider"
-                    onTouchStart={handleTouchStart}
-                    onTouchMove={handleTouchMove}
-                    onTouchEnd={handleTouchEnd}
-                  >
-                    <div
-                      className="project-detail__slider-track"
-                      style={
-                        hasMultiple
-                          ? {
-                              transform: `translateX(calc(9% - ${activeIndex} * (82% + var(--space-md))))`,
-                            }
-                          : undefined
-                      }
+          {/* ── Showcase Gallery (Lamborghini-style center-stage carousel) ── */}
+          {gallery.length > 0 && (
+            <div className="project-detail__showcase">
+              <div className="project-detail__showcase-header">
+                <h2 className="project-detail__section-title">Project Gallery</h2>
+                {hasMultiple && (
+                  <div className="project-detail__showcase-nav">
+                    <button
+                      type="button"
+                      className="project-detail__showcase-arrow"
+                      onClick={handlePrev}
+                      aria-label="Previous image"
                     >
-                      {gallery.map((img, i) => {
-                        const isActive = i === activeIndex;
-                        return (
-                          <div
-                            key={i}
-                            className={`project-detail__slide ${isActive ? 'project-detail__slide--active' : 'project-detail__slide--preview'}`}
-                            onClick={() => {
-                              if (isActive) {
-                                setLightboxIndex(i);
-                              } else {
-                                setActiveIndex(i);
-                              }
-                            }}
-                            role="button"
-                            tabIndex={0}
-                            aria-label={isActive ? `Open image ${i + 1} in viewer` : `View image ${i + 1}`}
-                          >
-                            <Image
-                              src={img}
-                              alt={`${project.name} — image ${i + 1}`}
-                              className="project-detail__slide-image"
-                              fallbackText={`${project.name} #${i + 1}`}
-                              loading={i === 0 ? 'eager' : 'lazy'}
-                            />
-                            {isActive && (
-                              <div className="project-detail__slide-badge">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                  <circle cx="11" cy="11" r="8" />
-                                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                                  <line x1="11" y1="8" x2="11" y2="14" />
-                                  <line x1="8" y1="11" x2="14" y2="11" />
-                                </svg>
-                                <span>Expand</span>
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="15 18 9 12 15 6" />
+                      </svg>
+                    </button>
+                    <span className="project-detail__showcase-counter">
+                      {activeIndex + 1} / {gallery.length}
+                    </span>
+                    <button
+                      type="button"
+                      className="project-detail__showcase-arrow"
+                      onClick={handleNext}
+                      aria-label="Next image"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </button>
                   </div>
+                )}
+              </div>
 
-                  {/* Indicator Dots */}
-                  {hasMultiple && (
-                    <div className="project-detail__dots">
-                      {gallery.map((_, i) => (
-                        <button
-                          key={i}
-                          type="button"
-                          className={`project-detail__dot ${i === activeIndex ? 'project-detail__dot--active' : ''}`}
-                          onClick={() => setActiveIndex(i)}
-                          aria-label={`Go to slide ${i + 1}`}
+              {/* Slider Viewport */}
+              <div
+                className="project-detail__slider"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                <div
+                  className="project-detail__slider-track"
+                  style={
+                    hasMultiple
+                      ? {
+                          transform: `translateX(calc(9% - ${activeIndex} * (82% + var(--space-md))))`,
+                        }
+                      : undefined
+                  }
+                >
+                  {gallery.map((img, i) => {
+                    const isActive = i === activeIndex;
+                    return (
+                      <div
+                        key={i}
+                        className={`project-detail__slide ${isActive ? 'project-detail__slide--active' : 'project-detail__slide--preview'}`}
+                        onClick={() => {
+                          if (isActive) {
+                            setLightboxIndex(i);
+                          } else {
+                            setActiveIndex(i);
+                          }
+                        }}
+                        role="button"
+                        tabIndex={0}
+                        aria-label={isActive ? `Open image ${i + 1} in viewer` : `View image ${i + 1}`}
+                      >
+                        <Image
+                          src={img}
+                          alt={`${project.name} — image ${i + 1}`}
+                          className="project-detail__slide-image"
+                          fallbackText={`${project.name} #${i + 1}`}
+                          loading={i === 0 ? 'eager' : 'lazy'}
                         />
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-
-              <h2 className="project-detail__section-title">Project Overview</h2>
-              <p className="project-detail__text">{project.description}</p>
-            </div>
-
-            {/* Sidebar */}
-            <aside className="project-detail__sidebar">
-              <div className="project-detail__info-card">
-                <h3 className="project-detail__info-title">Project Information</h3>
-                <div className="project-detail__info-row">
-                  <span className="project-detail__info-label">Category</span>
-                  <span className="project-detail__info-value">{project.category}</span>
-                </div>
-                <div className="project-detail__info-row">
-                  <span className="project-detail__info-label">Location</span>
-                  <span className="project-detail__info-value">{project.location}</span>
+                        {isActive && (
+                          <div className="project-detail__slide-badge">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <circle cx="11" cy="11" r="8" />
+                              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                              <line x1="11" y1="8" x2="11" y2="14" />
+                              <line x1="8" y1="11" x2="14" y2="11" />
+                            </svg>
+                            <span>Expand</span>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
-              {project.scope && project.scope.length > 0 && (
-                <div className="project-detail__info-card">
-                  <h3 className="project-detail__info-title">Scope / Services</h3>
-                  <ul className="project-detail__scope-list">
-                    {project.scope.map((item, i) => (
-                      <li className="project-detail__scope-item" key={i}>
-                        <span className="project-detail__scope-bullet" aria-hidden="true" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+              {/* Dots */}
+              {hasMultiple && (
+                <div className="project-detail__dots">
+                  {gallery.map((_, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      className={`project-detail__dot ${i === activeIndex ? 'project-detail__dot--active' : ''}`}
+                      onClick={() => setActiveIndex(i)}
+                      aria-label={`Go to slide ${i + 1}`}
+                    />
+                  ))}
                 </div>
               )}
+            </div>
+          )}
 
-              {project.equipment && project.equipment.length > 0 && (
-                <div className="project-detail__info-card">
-                  <h3 className="project-detail__info-title">Equipment Used</h3>
-                  <div className="project-detail__equipment-tags">
-                    {project.equipment.map((eq) => (
-                      <span className="project-detail__equipment-tag" key={eq}>{eq}</span>
-                    ))}
-                  </div>
-                </div>
-              )}
+          {/* ── Overview ── */}
+          {project.description && (
+            <div className="project-detail__overview reveal-slide-up">
+              <h2 className="project-detail__section-title">Project Overview</h2>
+              <p className="project-detail__text">{project.description}</p>
+            </div>
+          )}
 
-              <Button to="/quote" variant="primary" size="lg" className="project-detail__sidebar-cta">
-                Discuss Your Project
-              </Button>
-            </aside>
+          {/* ── Equipment Tags (inline) ── */}
+          {project.equipment && project.equipment.length > 0 && (
+            <div className="project-detail__equipment reveal-slide-up delay-1">
+              <h2 className="project-detail__section-title">Equipment Deployed</h2>
+              <div className="project-detail__equipment-tags">
+                {project.equipment.map((eq) => (
+                  <span className="project-detail__equipment-tag" key={eq}>{eq}</span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ── CTA Banner ── */}
+          <div className="project-detail__cta-banner reveal-slide-up delay-2">
+            <div className="project-detail__cta-content">
+              <h3 className="project-detail__cta-heading">Need Heavy Equipment for Your Project?</h3>
+              <p className="project-detail__cta-sub">
+                Vertex 7 supplies reliable machinery, certified operators, and logistical support across Bulacan and Central Luzon.
+              </p>
+            </div>
+            <Button to="/quote" variant="primary" size="lg">
+              Request a Quote
+            </Button>
           </div>
         </Container>
       </section>

@@ -16,8 +16,11 @@ export default function StatsStrip() {
   return (
     <section className="stats-strip" id="stats-strip" aria-label="Company statistics">
       <Container className="stats-strip__inner">
-        {STATS.map((stat) => (
-          <div className="stats-strip__item" key={stat.label}>
+        {STATS.map((stat, index) => (
+          <div
+            className={`stats-strip__item reveal-slide-up delay-${Math.min(index + 1, 5)}`}
+            key={stat.label}
+          >
             <span className="stats-strip__value">{stat.value}</span>
             <span className="stats-strip__label">{stat.label}</span>
           </div>

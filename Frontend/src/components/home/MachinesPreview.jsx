@@ -24,10 +24,10 @@ export default function MachinesPreview() {
         />
 
         <div className="machines-preview__grid">
-          {machines.map((machine) => (
+          {machines.map((machine, index) => (
             <Link
               to={`/machineries/${machine.slug}`}
-              className="machine-card"
+              className={`machine-card reveal-slide-up delay-${Math.min(index + 1, 5)}`}
               key={machine.id || machine.slug}
             >
               <div className="machine-card__image-wrap">
@@ -52,7 +52,7 @@ export default function MachinesPreview() {
           ))}
         </div>
 
-        <div className="machines-preview__footer">
+        <div className="machines-preview__footer reveal-slide-up delay-4">
           <Button to="/machineries" variant="outline-lime" size="md">
             View All Equipment
           </Button>
