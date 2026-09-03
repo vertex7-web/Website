@@ -15,7 +15,6 @@ const staticMachines = [
     id: 'static-1',
     slug: 'hydraulic-excavator',
     name: 'Hydraulic Excavator',
-    type: 'Excavator',
     category: 'Excavators',
     brand: '[Brand — CLIENT TO PROVIDE]',
     model: '[Model — CLIENT TO PROVIDE]',
@@ -27,7 +26,6 @@ const staticMachines = [
     id: 'static-2',
     slug: 'track-bulldozer',
     name: 'Track Bulldozer',
-    type: 'Bulldozer',
     category: 'Bulldozers',
     brand: '[Brand — CLIENT TO PROVIDE]',
     model: '[Model — CLIENT TO PROVIDE]',
@@ -39,7 +37,6 @@ const staticMachines = [
     id: 'static-3',
     slug: 'mobile-crane',
     name: 'Mobile Crane',
-    type: 'Crane',
     category: 'Cranes',
     brand: '[Brand — CLIENT TO PROVIDE]',
     model: '[Model — CLIENT TO PROVIDE]',
@@ -51,8 +48,11 @@ const staticMachines = [
 
 /* ── Normalize Supabase row → frontend shape ──────────────── */
 function normalize(row) {
+  const category = row.category || row.type || 'Equipment';
   return {
     ...row,
+    category,
+    type: category,
   };
 }
 

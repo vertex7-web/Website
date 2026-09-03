@@ -87,7 +87,7 @@ export default function MachineDetails() {
             <div className="machine-detail__image-wrap reveal-slide-up">
               <Image
                 src={machine.image}
-                alt={`${machine.type} — ${machine.brand} ${machine.model}`}
+                alt={`${machine.category || machine.name} — ${machine.brand} ${machine.model}`}
                 className="machine-detail__image"
                 fallbackText={`${machine.brand} ${machine.model}`}
               />
@@ -95,7 +95,7 @@ export default function MachineDetails() {
 
             {/* Info */}
             <div className="machine-detail__info reveal-slide-up delay-2">
-              <span className="machine-detail__type-badge">{machine.type}</span>
+              <span className="machine-detail__type-badge">{machine.category}</span>
 
               <div className="machine-detail__meta">
                 <div className="machine-detail__meta-item">

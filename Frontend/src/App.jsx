@@ -13,6 +13,7 @@ import Contact from './pages/Contact';
 import Quote from './pages/Quote';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
+import NotFound from './pages/NotFound';
 
 // Admin pages
 import AdminLogin from './pages/admin/AdminLogin';
@@ -43,6 +44,7 @@ export default function App() {
             <Route path="quote" element={<Quote />} />
             <Route path="terms" element={<Terms />} />
             <Route path="privacy" element={<Privacy />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
 
           {/* Admin routes */}

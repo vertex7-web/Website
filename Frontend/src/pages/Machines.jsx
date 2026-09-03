@@ -77,12 +77,12 @@ export default function Machines() {
                 <div className="machines-page__card-image-wrap">
                   <Image
                     src={machine.image}
-                    alt={`${machine.type} — ${machine.brand} ${machine.model}`}
+                    alt={`${machine.category || machine.name} — ${machine.brand} ${machine.model}`}
                     className="machines-page__card-image"
                     fallbackText={`${machine.brand} ${machine.model}`}
                     loading="lazy"
                   />
-                  <span className="machines-page__card-badge">{machine.type}</span>
+                  <span className="machines-page__card-badge">{machine.category}</span>
                 </div>
                 <div className="machines-page__card-body">
                   <span className="machines-page__card-brand">

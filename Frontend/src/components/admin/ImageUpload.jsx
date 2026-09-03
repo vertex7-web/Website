@@ -13,10 +13,27 @@ export default function ImageUpload({
   accept = 'image/jpeg,image/png,image/webp,image/gif',
   enableCrop = true,
   defaultAspect = '16:10',
+  aspectRatio,
+  maxWidth,
 }) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
   const [isDragOver, setIsDragOver] = useState(false);
+
+  const previewAspect = aspectRatio || defaultAspect || '16:10';
+
+  function getCssAspectRatio(aspect) {
+    if (!aspect || aspect === 'original') return 'auto';
+    if (aspect === '4:3') return '4 / 3';
+    if (aspect === '16:10') return '16 / 10';
+    if (aspect === '16:9') return '16 / 9';
+    if (aspect === '1:1') return '1 / 1';
+    if (typeof aspect === 'string' && aspect.includes(':')) {
+      const [w, h] = aspect.split(':');
+      return `${w} / ${h}`;
+    }
+    return aspect;
+  }
 
   // Crop modal state
   const [cropModalOpen, setCropModalOpen] = useState(false);
@@ -205,14 +222,27 @@ export default function ImageUpload({
   return (
     <div className="image-upload">
       {value ? (
-        <div className="image-upload__preview-card">
-          <div className="image-upload__preview-inner">
+        <div
+          className="image-upload__preview-card"
+          style={{
+            maxWidth: maxWidth || (previewAspect === '4:3' ? '440px' : '500px'),
+          }}
+        >
+          <div
+            className="image-upload__preview-inner"
+            style={{
+              aspectRatio: getCssAspectRatio(previewAspect),
+            }}
+          >
             <Image
               src={value}
               alt="Preview"
               className="image-upload__image"
               fallbackText="Preview Unavailable"
             />
+            {previewAspect && previewAspect !== 'original' && (
+              <span className="image-upload__aspect-tag">{previewAspect} Preview</span>
+            )}
             <div className="image-upload__overlay-actions">
               {enableCrop && (
                 <button
@@ -287,7 +317,7 @@ export default function ImageUpload({
               </div>
               <span className="image-upload__primary-text">{label}</span>
               <span className="image-upload__sub-text">
-                {enableCrop ? 'Click to browse or drop file' : 'Drag and drop or browse files'}
+                {enableCrop ? `Click to browse or drop file • ${previewAspect} ratio` : 'Drag and drop or browse files'}
               </span>
             </>
           )}

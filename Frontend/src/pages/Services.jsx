@@ -25,20 +25,37 @@ export default function Services() {
     });
   }, []);
 
-  // Smooth scroll to the targeted service section ONCE if a hash is present
+  // Smooth scroll to targeted service section with header offset compensation
   useEffect(() => {
-    if (location.hash && !hasScrolledRef.current) {
-      const targetId = location.hash.replace('#', '');
+    if (!location.hash) return;
+    const targetId = location.hash.replace('#', '');
+
+    const scrollToElement = () => {
       const element = document.getElementById(targetId);
-      if (element) {
-        hasScrolledRef.current = true;
-        const timer = setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
-        return () => clearTimeout(timer);
-      }
-    }
-  }, [location.hash, services]);
+      if (!element) return false;
+
+      const headerOffset = 95; // Fixed header height (80px) + comfortable clearance (15px)
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: 'smooth',
+      });
+      return true;
+    };
+
+    // Attempt immediately
+    const found = scrollToElement();
+    // Schedule short retries to account for image rendering & layout shifts
+    const timer1 = setTimeout(scrollToElement, 150);
+    const timer2 = setTimeout(scrollToElement, 350);
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, [location.hash, location.pathname, services]);
 
   return (
     <>

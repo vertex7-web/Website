@@ -4,6 +4,7 @@ import Container from '../components/ui/Container';
 import SectionHeading from '../components/ui/SectionHeading';
 import Image from '../components/ui/Image';
 import aboutImg from '../assets/about-preview.jpg';
+import heroAboutImg from '../assets/hero-about.jpg';
 import bir2303Img from '../assets/BIR 2303.jpg';
 import businessPermitImg from '../assets/Business permit.jpg';
 import dtiImg from '../assets/DTI.jpg';
@@ -46,7 +47,7 @@ export default function About() {
         eyebrow="About Us"
         title="At Vertex 7,"
         subtitle="we don’t just rent out equipment — we provide the power, precision, and partnership that builders need to bring their visions to life."
-        backgroundImage={aboutImg}
+        backgroundImage={heroAboutImg}
       />
 
       {/* Company Story */}

@@ -33,18 +33,18 @@ export default function MachinesPreview() {
               <div className="machine-card__image-wrap">
                 <Image
                   src={machine.image}
-                  alt={`${machine.type} — ${machine.brand} ${machine.model}`}
+                  alt={`${machine.category || machine.name} — ${machine.brand} ${machine.model}`}
                   className="machine-card__image"
                   fallbackText={`${machine.brand} ${machine.model}`}
                   loading="lazy"
                 />
-                <span className="machine-card__badge">{machine.type}</span>
+                <span className="machine-card__badge">{machine.category}</span>
               </div>
               <div className="machine-card__body">
                 <span className="machine-card__brand">
                   {machine.brand} {machine.model}
                 </span>
-                <h3 className="machine-card__title">{machine.type}</h3>
+                <h3 className="machine-card__title">{machine.name || machine.category}</h3>
                 <p className="machine-card__description">{machine.description}</p>
                 <span className="machine-card__link">View Machinery →</span>
               </div>
