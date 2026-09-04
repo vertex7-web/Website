@@ -2,10 +2,14 @@ import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import Button from '../components/ui/Button';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import { useSiteSettings } from '../contexts/SiteSettingsContext';
+import { formatTelHref } from '../data/settings';
 import heroContactImg from '../assets/hero-contact.jpg';
 import './Contact.css';
 
 export default function Contact() {
+  const { settings } = useSiteSettings();
+
   useDocumentMeta({
     title: 'Contact Us | Vertex 7',
     description: 'Get in touch with Vertex 7 for heavy equipment rentals, quotes, and construction supply inquiries in Bulacan, Philippines.',
@@ -36,7 +40,11 @@ export default function Contact() {
                   </div>
                   <div>
                     <span className="contact-page__info-label">Phone</span>
-                    <span className="contact-page__info-value">0968 856 8983</span>
+                    <span className="contact-page__info-value">
+                      <a href={formatTelHref(settings.phone)} className="contact-page__phone-link">
+                        {settings.phone}
+                      </a>
+                    </span>
                   </div>
                 </div>
 
@@ -49,7 +57,11 @@ export default function Contact() {
                   </div>
                   <div>
                     <span className="contact-page__info-label">Email</span>
-                    <span className="contact-page__info-value">vertex7.her@gmail.com</span>
+                    <span className="contact-page__info-value">
+                      <a href={`mailto:${settings.email}`} className="contact-page__phone-link">
+                        {settings.email}
+                      </a>
+                    </span>
                   </div>
                 </div>
 
@@ -62,7 +74,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <span className="contact-page__info-label">Address</span>
-                    <span className="contact-page__info-value">43 Viola St., Santa Rita Matanda, San Miguel, Bulacan</span>
+                    <span className="contact-page__info-value">{settings.address}</span>
                   </div>
                 </div>
 
@@ -75,7 +87,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <span className="contact-page__info-label">Business Hours</span>
-                    <span className="contact-page__info-value">[CLIENT TO PROVIDE]</span>
+                    <span className="contact-page__info-value">{settings.business_hours || '[CLIENT TO PROVIDE]'}</span>
                   </div>
                 </div>
               </div>
