@@ -46,9 +46,49 @@ const staticMachines = [
   },
 ];
 
+/* ── Category Normalization Helpers ──────────────────────── */
+export function normalizeCategoryName(raw) {
+  if (!raw || typeof raw !== 'string') return '';
+  const trimmed = raw.trim();
+  const lower = trimmed.toLowerCase();
+
+  // Canonical fleet category mappings (pluralized standard)
+  if (/^excavator(s)?$/i.test(lower)) return 'Excavators';
+  if (/^(bulldozer|dozer)(s)?$/i.test(lower)) return 'Bulldozers';
+  if (/^crane(s)?$/i.test(lower)) return 'Cranes';
+  if (/^(dump\s*truck|truck)(s)?$/i.test(lower)) return 'Trucks';
+  if (/^compactor(s)?(\s*\/\s*roller(s)?)?$/i.test(lower) || /^roller(s)?$/i.test(lower)) return 'Compactors';
+  if (/^backhoe(s)?(\s*loader(s)?)?$/i.test(lower)) return 'Backhoes';
+  if (/^(wheel\s*loader|loader)(s)?$/i.test(lower)) return 'Wheel Loaders';
+  if (/^(motor\s*grader|grader)(s)?$/i.test(lower)) return 'Motor Graders';
+  if (/^forklift(s)?$/i.test(lower)) return 'Forklifts';
+  if (/^(concrete\s*mixer|mixer)(s)?$/i.test(lower)) return 'Mixers';
+
+  // Fallback: clean Title Case
+  return trimmed
+    .split(' ')
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+    .join(' ');
+}
+
+export function matchesCategory(machineCategory, selectedCategory) {
+  if (!selectedCategory || selectedCategory === 'All') return true;
+  if (!machineCategory) return false;
+
+  const normMachine = normalizeCategoryName(machineCategory).toLowerCase();
+  const normSelected = normalizeCategoryName(selectedCategory).toLowerCase();
+
+  if (normMachine === normSelected) return true;
+  // Match singular and plural stems (e.g. "excavator" vs "excavators")
+  if (normMachine.replace(/s$/, '') === normSelected.replace(/s$/, '')) return true;
+
+  return false;
+}
+
 /* ── Normalize Supabase row → frontend shape ──────────────── */
 function normalize(row) {
-  const category = row.category || row.type || 'Equipment';
+  const rawCat = row.category || row.type || 'Equipment';
+  const category = normalizeCategoryName(rawCat);
   return {
     ...row,
     category,
@@ -97,19 +137,22 @@ export async function fetchMachineBySlug(slug) {
 }
 
 export async function fetchMachineCategories() {
-  if (!supabase) return [...new Set(staticMachines.map((m) => m.category))];
+  if (!supabase) return [...new Set(staticMachines.map((m) => normalizeCategoryName(m.category)))];
   try {
     const { data, error } = await supabase
       .from('machines')
-      .select('category')
+      .select('category, type')
       .eq('published', true);
 
     if (error || !data?.length) {
-      return [...new Set(staticMachines.map((m) => m.category))];
+      return [...new Set(staticMachines.map((m) => normalizeCategoryName(m.category)))];
     }
-    return [...new Set(data.map((m) => m.category).filter(Boolean))];
+    const cats = data
+      .map((m) => normalizeCategoryName(m.category || m.type))
+      .filter(Boolean);
+    return [...new Set(cats)];
   } catch {
-    return [...new Set(staticMachines.map((m) => m.category))];
+    return [...new Set(staticMachines.map((m) => normalizeCategoryName(m.category)))];
   }
 }
 
@@ -124,7 +167,7 @@ export function getMachineBySlug(slug) {
 }
 
 export function getMachineCategories() {
-  return [...new Set(staticMachines.map((m) => m.category))];
+  return [...new Set(staticMachines.map((m) => normalizeCategoryName(m.category)))];
 }
 
 export default staticMachines;

@@ -24,16 +24,24 @@
   overflow: hidden;
   transition:
     transform var(--transition-base),
-    box-shadow var(--transition-base);
+    box-shadow var(--transition-base),
+    opacity 0.26s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   text-decoration: none;
   color: inherit;
+  height: 100%;
 }
 
 .machine-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-lg);
+}
+
+.machine-card--fading {
+  opacity: 0;
+  transform: scale(0.98) !important;
+  pointer-events: none;
 }
 
 /* Image */
@@ -85,6 +93,10 @@
   letter-spacing: 0.1em;
   color: var(--color-muted);
   margin-bottom: var(--space-xs);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 1.2em;
 }
 
 .machine-card__title {
@@ -95,6 +107,11 @@
   color: var(--color-white);
   line-height: 1.2;
   margin-bottom: var(--space-sm);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.4em; /* Exactly 2 lines reserved to prevent height shift */
 }
 
 .machine-card__description {
@@ -103,6 +120,11 @@
   line-height: 1.6;
   flex-grow: 1;
   margin-bottom: var(--space-md);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 4.8em; /* Exactly 3 lines reserved to prevent height shift */
 }
 
 .machine-card__link {
@@ -113,6 +135,7 @@
   letter-spacing: 0.08em;
   color: var(--color-lime);
   transition: color var(--transition-fast);
+  margin-top: auto;
 }
 
 .machine-card:hover .machine-card__link {
