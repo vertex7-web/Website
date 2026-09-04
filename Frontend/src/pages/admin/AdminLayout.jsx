@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Outlet, useNavigate, useLocation } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext';
+import transparentLogo from '../../assets/transparent-logo.svg';
 import './AdminLayout.css';
 
 export default function AdminLayout() {
@@ -59,9 +60,7 @@ export default function AdminLayout() {
           <span className="admin-hamburger__line" />
         </button>
         <div className="admin-mobile-header__brand">
-          <span className="admin-sidebar__logo">
-            <span>V</span><span className="admin-sidebar__logo-accent">7</span>
-          </span>
+          <img src={transparentLogo} alt="Vertex 7" className="admin-sidebar__logo-img" />
           <span className="admin-sidebar__label">Admin</span>
         </div>
       </header>
@@ -81,9 +80,7 @@ export default function AdminLayout() {
       >
         <div className="admin-sidebar__header">
           <div className="admin-sidebar__brand">
-            <span className="admin-sidebar__logo">
-              <span>V</span><span className="admin-sidebar__logo-accent">7</span>
-            </span>
+            <img src={transparentLogo} alt="Vertex 7" className="admin-sidebar__logo-img" />
             <span className="admin-sidebar__label">Admin</span>
           </div>
 

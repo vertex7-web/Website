@@ -44,6 +44,25 @@
   gap: var(--space-sm);
 }
 
+.admin-sidebar__logo-img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.admin-sidebar__brand-text {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.1em;
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--color-white);
+  text-transform: uppercase;
+}
+
 .admin-sidebar__logo {
   font-family: var(--font-heading);
   font-size: var(--text-xl);

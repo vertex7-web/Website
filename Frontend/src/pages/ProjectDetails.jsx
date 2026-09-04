@@ -36,6 +36,21 @@ export default function ProjectDetails() {
   const gallery = project?.gallery || [];
   const hasMultiple = gallery.length > 1;
 
+  const scopeItems = Array.isArray(project?.scope)
+    ? project.scope.filter((s) => typeof s === 'string' && s.trim().length > 0)
+    : typeof project?.scope === 'string' && project.scope.trim().length > 0
+      ? project.scope.split(/[\n,]+/).map((s) => s.trim()).filter(Boolean)
+      : [];
+
+  const equipmentItems = Array.isArray(project?.equipment)
+    ? project.equipment.filter((e) => typeof e === 'string' && e.trim().length > 0)
+    : typeof project?.equipment === 'string' && project.equipment.trim().length > 0
+      ? project.equipment.split(/[\n,]+/).map((e) => e.trim()).filter(Boolean)
+      : [];
+
+  const hasScope = scopeItems.length > 0;
+  const hasEquipment = equipmentItems.length > 0;
+
   function handlePrev() {
     setActiveIndex((prev) => (prev > 0 ? prev - 1 : gallery.length - 1));
   }
@@ -166,13 +181,13 @@ export default function ProjectDetails() {
 
               {/* Slider Viewport */}
               <div
-                className="project-detail__slider"
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleTouchEnd}
+                className={`project-detail__slider ${!hasMultiple ? 'project-detail__slider--single' : ''}`}
+                onTouchStart={hasMultiple ? handleTouchStart : undefined}
+                onTouchMove={hasMultiple ? handleTouchMove : undefined}
+                onTouchEnd={hasMultiple ? handleTouchEnd : undefined}
               >
                 <div
-                  className="project-detail__slider-track"
+                  className={`project-detail__slider-track ${!hasMultiple ? 'project-detail__slider-track--single' : ''}`}
                   style={
                     hasMultiple
                       ? {
@@ -186,7 +201,7 @@ export default function ProjectDetails() {
                     return (
                       <div
                         key={i}
-                        className={`project-detail__slide ${isActive ? 'project-detail__slide--active' : 'project-detail__slide--preview'}`}
+                        className={`project-detail__slide ${isActive ? 'project-detail__slide--active' : 'project-detail__slide--preview'} ${!hasMultiple ? 'project-detail__slide--single' : ''}`}
                         onClick={() => {
                           if (isActive) {
                             setLightboxIndex(i);
@@ -247,15 +262,46 @@ export default function ProjectDetails() {
             </div>
           )}
 
-          {/* ── Equipment Tags (inline) ── */}
-          {project.equipment && project.equipment.length > 0 && (
-            <div className="project-detail__equipment reveal-slide-up delay-1">
-              <h2 className="project-detail__section-title">Equipment Deployed</h2>
-              <div className="project-detail__equipment-tags">
-                {project.equipment.map((eq) => (
-                  <span className="project-detail__equipment-tag" key={eq}>{eq}</span>
-                ))}
-              </div>
+          {/* ── Scope & Equipment Deployed Grid ── */}
+          {(hasScope || hasEquipment) && (
+            <div className={`project-detail__specs-grid ${(!hasScope || !hasEquipment) ? 'project-detail__specs-grid--single' : ''} reveal-slide-up delay-1`}>
+              {hasScope && (
+                <div className="project-detail__spec-col project-detail__scope">
+                  <h2 className="project-detail__section-title">Project Scope</h2>
+                  <ul className="project-detail__scope-list">
+                    {scopeItems.map((item, idx) => (
+                      <li key={idx} className="project-detail__scope-item">
+                        <svg
+                          className="project-detail__scope-icon"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden="true"
+                        >
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {hasEquipment && (
+                <div className="project-detail__spec-col project-detail__equipment">
+                  <h2 className="project-detail__section-title">Equipment Deployed</h2>
+                  <div className="project-detail__equipment-tags">
+                    {equipmentItems.map((eq) => (
+                      <span className="project-detail__equipment-tag" key={eq}>{eq}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
 

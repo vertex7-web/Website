@@ -90,7 +90,7 @@ export default function AdminProjectForm() {
       name: form.name.trim(),
       slug: form.slug.trim() || slugify(form.name),
       location: form.location.trim(),
-      category: form.category.trim(),
+      category: form.category ? form.category.trim() : '',
       description: form.description.trim(),
       scope: form.scope.filter((s) => s.trim()),
       equipment: form.equipment.filter((s) => s.trim()),
@@ -155,26 +155,15 @@ export default function AdminProjectForm() {
               />
             </div>
           </div>
-          <div className="admin-form__row">
-            <div className="admin-form__field">
-              <label className="admin-form__label">Location</label>
-              <input
-                name="location"
-                value={form.location}
-                onChange={handleChange}
-                className="admin-form__input"
-              />
-            </div>
-            <div className="admin-form__field">
-              <label className="admin-form__label">Category</label>
-              <input
-                name="category"
-                value={form.category}
-                onChange={handleChange}
-                className="admin-form__input"
-                placeholder="e.g. Infrastructure, Commercial"
-              />
-            </div>
+          <div className="admin-form__field">
+            <label className="admin-form__label">Location</label>
+            <input
+              name="location"
+              value={form.location}
+              onChange={handleChange}
+              className="admin-form__input"
+              placeholder="e.g. San Miguel, Bulacan"
+            />
           </div>
           <div className="admin-form__field">
             <label className="admin-form__label">Description</label>

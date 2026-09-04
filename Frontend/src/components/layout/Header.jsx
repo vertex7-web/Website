@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router';
 import Container from '../ui/Container';
 import Button from '../ui/Button';
+import transparentLogo from '../../assets/transparent-logo.svg';
 import './Header.css';
 
 const NAV_LINKS = [
@@ -50,8 +51,18 @@ export default function Header() {
         <Container className="header__inner">
           {/* Logo */}
           <Link to="/" className="header__logo" aria-label="Vertex 7 — Home">
-            <span className="header__logo-mark">VERTEX</span>
-            <span className="header__logo-accent">7</span>
+            <img
+              src={transparentLogo}
+              alt=""
+              className="header__logo-img"
+              width="32"
+              height="32"
+              aria-hidden="true"
+            />
+            <span className="header__logo-text">
+              <span className="header__logo-mark">VERTEX</span>
+              <span className="header__logo-accent">7</span>
+            </span>
           </Link>
 
           {/* Desktop Navigation */}

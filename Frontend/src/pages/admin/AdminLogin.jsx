@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext';
+import transparentLogo from '../../assets/transparent-logo.svg';
 import './AdminLogin.css';
 
 export default function AdminLogin() {
@@ -36,9 +37,7 @@ export default function AdminLogin() {
     <div className="admin-login">
       <form className="admin-login__card" onSubmit={handleSubmit}>
         <div className="admin-login__header">
-          <span className="admin-login__logo">
-            <span>VERTEX</span><span className="admin-login__logo-accent">7</span>
-          </span>
+          <img src={transparentLogo} alt="Vertex 7" className="admin-login__logo-img" />
           <h1 className="admin-login__title">Admin Dashboard</h1>
           <p className="admin-login__subtitle">Sign in to manage your content</p>
         </div>

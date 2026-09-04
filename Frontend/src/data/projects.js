@@ -21,7 +21,12 @@ const staticProjects = [
     cover_image: projectHighway,
     gallery: [projectHighway],
     description: '[CLIENT TO PROVIDE]',
-    scope: [],
+    scope: [
+      'Site clearing and grubbing',
+      'Subgrade excavation and compaction',
+      'Aggregate subbase and base course installation',
+      'Concrete pouring and drainage structure construction',
+    ],
     equipment: ['Excavator', 'Bulldozer', 'Dump Trucks'],
   },
   {
@@ -34,8 +39,13 @@ const staticProjects = [
     cover_image: projectBuilding,
     gallery: [projectBuilding],
     description: '[CLIENT TO PROVIDE]',
-    scope: [],
-    equipment: ['Mobile Crane', 'Excavator'],
+    scope: [
+      'Deep basement and foundation excavation',
+      'Structural steel erection support',
+      'Utility trenching and backfilling',
+      'Final site grading and finishing',
+    ],
+    equipment: [],
   },
   {
     id: 'static-3',

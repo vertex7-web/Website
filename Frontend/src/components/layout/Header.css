@@ -33,8 +33,8 @@
 
 .header__logo {
   display: flex;
-  align-items: baseline;
-  gap: 0.2em;
+  align-items: center;
+  gap: 0.6rem;
   font-family: var(--font-heading);
   font-size: var(--text-xl);
   font-weight: 800;
@@ -43,6 +43,24 @@
   color: var(--color-white);
   text-decoration: none;
   flex-shrink: 0;
+}
+
+.header__logo-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.header__logo:hover .header__logo-img {
+  transform: scale(1.05);
+}
+
+.header__logo-text {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.2em;
 }
 
 .header__logo-accent {

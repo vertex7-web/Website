@@ -6,10 +6,10 @@ import './StatsStrip.css';
    with client-verified statistics before launch.
    ─────────────────────────────────────────────────────────── */
 const STATS = [
-  { value: '00+', label: 'Projects / Rentals' },
-  { value: '00%', label: 'Service Reliability' },
-  { value: '00+', label: 'Equipment Units' },
-  { value: '00+', label: 'Operating Hours' },
+  { value: '8+', label: 'Years in Construction & Rentals' },
+  { value: '15+', label: 'Modern Equipment Fleet' },
+  { value: '10+', label: 'Provinces Covered' },
+  { value: '100+', label: 'Successful Deployments' },
 ];
 
 export default function StatsStrip() {
