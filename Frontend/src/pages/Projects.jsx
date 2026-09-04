@@ -4,6 +4,7 @@ import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import Image from '../components/ui/Image';
 import { fetchProjects, getProjects } from '../data/projects';
+import heroProjectsImg from '../assets/hero-projects.jpg';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import './Projects.css';
 
@@ -31,6 +32,7 @@ export default function Projects() {
         eyebrow="Our Work"
         title="Projects"
         subtitle="A portfolio of construction projects supported by Vertex 7 equipment and services."
+        backgroundImage={heroProjectsImg}
       />
 
       <section className="projects-page" id="projects-gallery">
@@ -46,7 +48,7 @@ export default function Projects() {
                 return (
                   <Link
                     to={`/projects/${project.slug}`}
-                    className={`projects-page__card ${isFeatured ? 'projects-page__card--featured' : ''}`}
+                    className={`projects-page__card reveal-slide-up delay-${Math.min((index % 3) + 1, 5)} ${isFeatured ? 'projects-page__card--featured' : ''}`}
                     key={project.id}
                   >
                     <Image

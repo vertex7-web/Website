@@ -23,12 +23,13 @@
   border-bottom: none;
 }
 
-.services-page__item--reversed {
-  direction: rtl;
-}
-
-.services-page__item--reversed > * {
-  direction: ltr;
+@media (min-width: 769px) {
+  .services-page__item--reversed .services-page__image-wrap {
+    order: 2;
+  }
+  .services-page__item--reversed .services-page__content {
+    order: 1;
+  }
 }
 
 /* Image */
@@ -111,7 +112,6 @@
   .services-page__item--reversed {
     grid-template-columns: 1fr;
     gap: var(--space-2xl);
-    direction: ltr;
   }
 
   .services-page__image-wrap {

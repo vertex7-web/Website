@@ -65,6 +65,17 @@
   line-height: 1.5;
 }
 
+.contact-page__phone-link {
+  color: var(--color-white);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.contact-page__phone-link:hover {
+  color: var(--color-lime);
+}
+
+
 /* Social Links */
 .contact-page__social {
   padding-top: var(--space-xl);

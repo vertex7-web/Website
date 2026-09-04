@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router';
 import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import Button from '../components/ui/Button';
 import Image from '../components/ui/Image';
 import { fetchServices, getServices } from '../data/services';
+import heroServicesImg from '../assets/hero-services.jpg';
 import useDocumentMeta from '../hooks/useDocumentMeta';
 import './Services.css';
 
 export default function Services() {
   const [services, setServices] = useState(getServices());
   const location = useLocation();
+  const hasScrolledRef = useRef(false);
 
   useDocumentMeta({
     title: 'Services | Vertex 7',
@@ -18,22 +20,42 @@ export default function Services() {
   });
 
   useEffect(() => {
-    fetchServices().then((data) => setServices(data));
+    fetchServices().then((data) => {
+      setServices(data);
+    });
   }, []);
 
-  // Smooth scroll to the targeted service section if a hash is present
+  // Smooth scroll to targeted service section with header offset compensation
   useEffect(() => {
-    if (location.hash) {
-      const targetId = location.hash.replace('#', '');
+    if (!location.hash) return;
+    const targetId = location.hash.replace('#', '');
+
+    const scrollToElement = () => {
       const element = document.getElementById(targetId);
-      if (element) {
-        // Small delay to ensure layout and images are settled
-        requestAnimationFrame(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
-        });
-      }
-    }
-  }, [location.hash, services]);
+      if (!element) return false;
+
+      const headerOffset = 95; // Fixed header height (80px) + comfortable clearance (15px)
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: 'smooth',
+      });
+      return true;
+    };
+
+    // Attempt immediately
+    const found = scrollToElement();
+    // Schedule short retries to account for image rendering & layout shifts
+    const timer1 = setTimeout(scrollToElement, 150);
+    const timer2 = setTimeout(scrollToElement, 350);
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, [location.hash, location.pathname, services]);
 
   return (
     <>
@@ -41,14 +63,15 @@ export default function Services() {
         eyebrow="What We Offer"
         title="Our Services"
         subtitle="From equipment rental to on-site support — comprehensive services built for the field."
+        backgroundImage={heroServicesImg}
       />
 
       <section className="services-page" id="services-directory">
         <Container>
           {services.map((service, index) => (
             <article
-              className={`services-page__item ${index % 2 !== 0 ? 'services-page__item--reversed' : ''}`}
-              key={service.id}
+              className={`services-page__item reveal-slide-up ${index % 2 !== 0 ? 'services-page__item--reversed' : ''}`}
+              key={service.id || service.slug || index}
               id={service.slug}
             >
               {/* Image */}

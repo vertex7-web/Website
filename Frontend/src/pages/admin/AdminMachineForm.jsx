@@ -12,7 +12,6 @@ const BLANK = {
   slug: '',
   brand: '',
   model: '',
-  type: '',
   category: '',
   image: '',
   description: '',
@@ -36,7 +35,16 @@ export default function AdminMachineForm() {
         if (fetchErr || !data) {
           setError('Machinery not found.');
         } else {
-          setForm(data);
+          setForm({
+            name: data.name || '',
+            slug: data.slug || '',
+            brand: data.brand || '',
+            model: data.model || '',
+            category: data.category || data.type || '',
+            image: data.image || '',
+            description: data.description || '',
+            published: data.published ?? true,
+          });
         }
         setLoading(false);
       });
@@ -56,13 +64,15 @@ export default function AdminMachineForm() {
     setError('');
     setSaving(true);
 
+    const categoryVal = form.category.trim();
+
     const payload = {
       name: form.name.trim(),
       slug: form.slug.trim() || slugify(form.name),
       brand: form.brand.trim(),
       model: form.model.trim(),
-      type: form.type.trim(),
-      category: form.category.trim(),
+      category: categoryVal,
+      type: categoryVal, // sync DB column if exists in Supabase
       image: form.image,
       description: form.description.trim(),
       published: form.published,
@@ -100,47 +110,95 @@ export default function AdminMachineForm() {
           <div className="admin-form__row">
             <div className="admin-form__field">
               <label className="admin-form__label">Name *</label>
-              <input name="name" value={form.name} onChange={handleChange} className="admin-form__input" required />
+              <input
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                className="admin-form__input"
+                placeholder="e.g. Caterpillar 320D Hydraulic Excavator"
+                required
+              />
             </div>
             <div className="admin-form__field">
-              <label className="admin-form__label">Slug</label>
-              <input name="slug" value={form.slug} onChange={handleChange} className="admin-form__input" />
+              <label className="admin-form__label">Category *</label>
+              <input
+                name="category"
+                value={form.category}
+                onChange={handleChange}
+                className="admin-form__input"
+                placeholder="e.g. Excavators, Bulldozers, Cranes..."
+                list="machine-categories-list"
+                required
+              />
+              <datalist id="machine-categories-list">
+                <option value="Excavators" />
+                <option value="Bulldozers" />
+                <option value="Cranes" />
+                <option value="Dump Trucks" />
+                <option value="Backhoes" />
+                <option value="Wheel Loaders" />
+                <option value="Compactors / Rollers" />
+                <option value="Motor Graders" />
+                <option value="Earthmoving" />
+              </datalist>
             </div>
           </div>
           <div className="admin-form__row">
             <div className="admin-form__field">
               <label className="admin-form__label">Brand</label>
-              <input name="brand" value={form.brand} onChange={handleChange} className="admin-form__input" placeholder="e.g. Caterpillar" />
+              <input
+                name="brand"
+                value={form.brand}
+                onChange={handleChange}
+                className="admin-form__input"
+                placeholder="e.g. Caterpillar"
+              />
             </div>
             <div className="admin-form__field">
               <label className="admin-form__label">Model</label>
-              <input name="model" value={form.model} onChange={handleChange} className="admin-form__input" placeholder="e.g. 320D" />
-            </div>
-          </div>
-          <div className="admin-form__row">
-            <div className="admin-form__field">
-              <label className="admin-form__label">Type</label>
-              <input name="type" value={form.type} onChange={handleChange} className="admin-form__input" placeholder="e.g. Excavator" />
-            </div>
-            <div className="admin-form__field">
-              <label className="admin-form__label">Category</label>
-              <input name="category" value={form.category} onChange={handleChange} className="admin-form__input" placeholder="e.g. Earthmoving" />
+              <input
+                name="model"
+                value={form.model}
+                onChange={handleChange}
+                className="admin-form__input"
+                placeholder="e.g. 320D"
+              />
             </div>
           </div>
           <div className="admin-form__field">
+            <label className="admin-form__label">Slug</label>
+            <input
+              name="slug"
+              value={form.slug}
+              onChange={handleChange}
+              className="admin-form__input"
+              placeholder="Auto-generated from name"
+            />
+          </div>
+          <div className="admin-form__field">
             <label className="admin-form__label">Description</label>
-            <textarea name="description" value={form.description} onChange={handleChange} className="admin-form__textarea" rows="3" />
+            <textarea
+              name="description"
+              value={form.description}
+              onChange={handleChange}
+              className="admin-form__textarea"
+              rows="3"
+              placeholder="Provide equipment specifications, capabilities, and rental readiness..."
+            />
           </div>
         </div>
 
         <div className="admin-form__section">
-          <h3 className="admin-form__section-title">Machinery Image</h3>
+          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 'var(--space-xs)' }}>
+            <h3 className="admin-form__section-title" style={{ marginBottom: 0, borderBottom: 'none' }}>Machinery Image</h3>
+          </div>
+          <div style={{ height: '1px', backgroundColor: 'var(--color-border)', marginBottom: 'var(--space-md)' }} />
           <ImageUpload
             folder="machines"
             value={form.image}
             onChange={(url) => setForm((prev) => ({ ...prev, image: url }))}
             enableCrop={true}
-            defaultAspect="16:10"
+            defaultAspect="4:3"
             label="Upload Machinery Image"
           />
         </div>

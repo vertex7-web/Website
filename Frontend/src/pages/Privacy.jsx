@@ -2,10 +2,13 @@ import PageHero from '../components/ui/PageHero';
 import Container from '../components/ui/Container';
 import { Link } from 'react-router';
 import useDocumentMeta from '../hooks/useDocumentMeta';
+import { useSiteSettings } from '../contexts/SiteSettingsContext';
+import { formatTelHref } from '../data/settings';
 import './Terms.css'; // Shared sleek legal page styles
 
 export default function Privacy() {
   const lastUpdated = 'February 2026';
+  const { settings } = useSiteSettings();
 
   useDocumentMeta({
     title: 'Privacy Policy | Vertex 7',
@@ -141,9 +144,9 @@ export default function Privacy() {
               </p>
               <div className="legal-contact-card">
                 <p><strong>Vertex 7 Data Privacy Team</strong></p>
-                <p>43 Viola St., Santa Rita Matanda, San Miguel, Bulacan, Philippines</p>
-                <p>Email: <a href="mailto:vertex7.her@gmail.com" className="legal-link">vertex7.her@gmail.com</a></p>
-                <p>Phone: <a href="tel:+639688568983" className="legal-link">0968 856 8983</a></p>
+                <p>{settings.address || '43 Viola St., Santa Rita Matanda, San Miguel, Bulacan, Philippines'}</p>
+                <p>Email: <a href={`mailto:${settings.email}`} className="legal-link">{settings.email}</a></p>
+                <p>Phone: <a href={formatTelHref(settings.phone)} className="legal-link">{settings.phone}</a></p>
               </div>
             </article>
           </div>

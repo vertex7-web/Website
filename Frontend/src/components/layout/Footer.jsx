@@ -1,5 +1,7 @@
 import { Link } from 'react-router';
 import Container from '../ui/Container';
+import { useSiteSettings } from '../../contexts/SiteSettingsContext';
+import { formatTelHref } from '../../data/settings';
 import './Footer.css';
 
 const NAV_LINKS = [
@@ -13,6 +15,7 @@ const NAV_LINKS = [
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const { settings } = useSiteSettings();
 
   return (
     <footer className="footer" id="site-footer">
@@ -53,15 +56,19 @@ export default function Footer() {
             <ul className="footer__contact-list">
               <li className="footer__contact-item">
                 <span className="footer__contact-label">Phone</span>
-                <span className="footer__contact-value"><a href="tel:+639688568983">0968 856 8983</a></span>
+                <span className="footer__contact-value">
+                  <a href={formatTelHref(settings.phone)}>{settings.phone}</a>
+                </span>
               </li>
               <li className="footer__contact-item">
                 <span className="footer__contact-label">Email</span>
-                <span className="footer__contact-value"><a href="mailto:vertex7.her@gmail.com">vertex7.her@gmail.com</a></span>
+                <span className="footer__contact-value">
+                  <a href={`mailto:${settings.email}`}>{settings.email}</a>
+                </span>
               </li>
               <li className="footer__contact-item">
                 <span className="footer__contact-label">Address</span>
-                <span className="footer__contact-address-value">43 Viola St., Santa Rita Matanda, San Miguel, Bulacan</span>
+                <span className="footer__contact-address-value">{settings.address}</span>
               </li>
             </ul>
           </div>

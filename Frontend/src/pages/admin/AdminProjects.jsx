@@ -55,7 +55,6 @@ export default function AdminProjects() {
             <tr>
               <th></th>
               <th>Name</th>
-              <th>Category</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -74,7 +73,6 @@ export default function AdminProjects() {
                   />
                 </td>
                 <td className="admin-table__cell-name">{p.name}</td>
-                <td className="admin-table__cell-category">{p.category || 'General'}</td>
                 <td className="admin-table__cell-status">
                   <button
                     className={`admin-badge ${p.published ? 'admin-badge--published' : 'admin-badge--draft'}`}

@@ -89,18 +89,50 @@
   overflow: hidden;
   border: 1px solid var(--color-border);
   background-color: var(--color-dark);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition-fast);
+}
+
+.image-upload__preview-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .image-upload__preview-inner {
   position: relative;
   width: 100%;
+  background-color: var(--color-black);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .image-upload__image {
   width: 100%;
-  max-height: 280px;
+  height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* Aspect Tag */
+.image-upload__aspect-tag {
+  position: absolute;
+  bottom: var(--space-xs);
+  left: var(--space-xs);
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--color-lime);
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(163, 231, 46, 0.25);
+  pointer-events: none;
+  z-index: 2;
 }
 
 /* Overlay Actions */

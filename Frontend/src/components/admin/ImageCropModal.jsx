@@ -4,9 +4,9 @@ import getCroppedImg from '../../lib/cropImage';
 import './ImageCropModal.css';
 
 const ASPECT_RATIOS = [
-  { label: '16:10 (Card)', value: 16 / 10, key: '16:10' },
-  { label: '16:9 (Hero)', value: 16 / 9, key: '16:9' },
-  { label: '4:3 (Photo)', value: 4 / 3, key: '4:3' },
+  { label: '4:3 (Machinery / Standard)', value: 4 / 3, key: '4:3' },
+  { label: '16:10 (Projects / Card)', value: 16 / 10, key: '16:10' },
+  { label: '16:9 (Hero Banner)', value: 16 / 9, key: '16:9' },
   { label: '1:1 (Square)', value: 1, key: '1:1' },
   { label: 'Original', value: null, key: 'original' },
 ];

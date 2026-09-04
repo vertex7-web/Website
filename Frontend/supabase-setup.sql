@@ -135,3 +135,40 @@ create policy "Auth update images"
 create policy "Auth delete images"
   on storage.objects for delete
   using (bucket_id = 'images' and auth.role() = 'authenticated');
+
+-- ── Site Settings (Phone Number & Contact Info) ──────────────
+create table if not exists site_settings (
+  id text primary key default 'general',
+  phone text default '0968 856 8983',
+  email text default 'vertex7.her@gmail.com',
+  address text default '43 Viola St., Santa Rita Matanda, San Miguel, Bulacan',
+  business_hours text default 'Mon - Sat: 8:00 AM - 5:00 PM',
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+alter table site_settings enable row level security;
+
+create policy "Public read site_settings"
+  on site_settings for select
+  using (true);
+
+create policy "Auth full access site_settings"
+  on site_settings for all
+  using (auth.role() = 'authenticated');
+
+create trigger site_settings_updated_at
+  before update on site_settings
+  for each row execute function update_updated_at();
+
+-- Insert initial default record if not present
+insert into site_settings (id, phone, email, address, business_hours)
+values (
+  'general',
+  '0968 856 8983',
+  'vertex7.her@gmail.com',
+  '43 Viola St., Santa Rita Matanda, San Miguel, Bulacan',
+  'Mon - Sat: 8:00 AM - 5:00 PM'
+)
+on conflict (id) do nothing;
+
