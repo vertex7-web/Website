@@ -2,7 +2,7 @@
 
 .stats-strip {
   background-color: var(--color-charcoal);
-  padding: var(--space-2xl) 0;
+  padding: var(--space-lg) 0;
   border-bottom: 3px solid var(--color-lime);
 }
 

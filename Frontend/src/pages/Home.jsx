@@ -19,7 +19,7 @@ export default function Home() {
       {/* 1. Hero — Full-width photography */}
       <Hero />
 
-      {/* 2. Trust / Statistics Strip — Dark solid */}
+      {/* 2. Trust / Statistics Strip — Dark solid*/}
       <StatsStrip />
 
       {/* 3. About Preview — Light / neutral */}
