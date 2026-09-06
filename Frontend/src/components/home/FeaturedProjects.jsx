@@ -88,7 +88,7 @@ export default function FeaturedProjects() {
     <section
       className="featured-projects"
       id="featured-projects"
-      onMouseEnter={() => setIsPaused(true)}
+      onMouseEnter={() => setIsPaused(false)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
       onBlurCapture={() => setIsPaused(false)}
