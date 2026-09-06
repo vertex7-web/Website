@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
+import { Analytics } from '@vercel/analytics/react';
 import { AuthProvider } from './contexts/AuthContext';
 import { SiteSettingsProvider } from './contexts/SiteSettingsContext';
 import Layout from './components/layout/Layout';
@@ -73,6 +74,7 @@ export default function App() {
               <Route path="settings" element={<AdminSettings />} />
             </Route>
           </Routes>
+          <Analytics />
         </BrowserRouter>
       </SiteSettingsProvider>
     </AuthProvider>
