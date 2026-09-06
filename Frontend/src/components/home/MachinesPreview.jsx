@@ -89,7 +89,7 @@ export default function MachinesPreview() {
     <section
       className="machines-preview"
       id="machines-preview"
-      onMouseEnter={() => setIsPaused(true)}
+      onMouseEnter={() => setIsPaused(false)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
       onBlurCapture={() => setIsPaused(false)}
