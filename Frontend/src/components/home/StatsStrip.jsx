@@ -9,7 +9,8 @@ const STATS = [
   {/*{ value: '8+', label: 'Years in Construction & Rentals' },
   { value: '15+', label: 'Modern Equipment Fleet' },
   { value: '10+', label: 'Provinces Covered' },
-  { value: '100+', label: 'Successful Deployments' },*/}
+  { value: '100%', label: 'Service Reliability' },
+   */}
 ];
 
 export default function StatsStrip() {

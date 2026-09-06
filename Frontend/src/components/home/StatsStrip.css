@@ -1,9 +1,15 @@
 /* ── Statistics Strip ─────────────────────────────────────── */
 
 .stats-strip {
+  /*background: repeating-linear-gradient(-45deg,
+      var(--color-lime-hover),
+      var(--color-lime-hover) 20px,
+      var(--color-dark) 20px,
+      var(--color-dark) 40px);
+  */
   background-color: var(--color-charcoal);
-  padding: var(--space-lg) 0;
-  border-bottom: 3px solid var(--color-lime);
+  padding: var(--space-sm) 0;
+  /* border-bottom: 3px solid var(--color-lime); */
 }
 
 .stats-strip__inner {
