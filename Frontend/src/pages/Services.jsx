@@ -62,7 +62,7 @@ export default function Services() {
       <PageHero
         eyebrow="What We Offer"
         title="Our Services"
-        subtitle="From equipment rental to on-site support — comprehensive services built for the field."
+        subtitle="From equipment rental to on-site support. Comprehensive services built for the field."
         backgroundImage={heroServicesImg}
       />
 

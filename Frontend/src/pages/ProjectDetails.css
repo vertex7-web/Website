@@ -410,6 +410,7 @@
 }
 
 @media (max-width: 768px) {
+
   .project-detail__specs-grid,
   .project-detail__specs-grid--single {
     grid-template-columns: 1fr;

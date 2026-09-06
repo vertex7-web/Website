@@ -1,0 +1,21 @@
+/* TEAM */
+  Developer: Justin Manuzon
+  Role: Full-Stack Web Developer / UI Designer
+  Email: justinmanuzon413@gmail.com
+  GitHub: https://github.com/chickenjazz
+  Location: Bulacan, Philippines
+
+/* OWNER & CLIENT */
+  Owner: Jayson Sunga / Regine Carmelie Sunga
+  Business: Vertex 7 Heavy Equipment Rental
+  Location: 43 Viola St., Santa Rita Matanda, San Miguel, Bulacan, Philippines
+  Website: https://vertex7.com.ph
+  Contact: vertex7.her@gmail.com
+
+/* SITE */
+  Last update: 2026/09/06
+  Language: English
+  Standards: HTML5, CSS3, JavaScript (ESNext)
+  Frameworks & Libraries: React 19, React Router v8, Supabase
+  Build Tool: Vite
+  Software: Visual Studio Code

@@ -34,7 +34,7 @@ export default function Quote() {
               <div className="quote-page__sidebar-card">
                 <h3 className="quote-page__sidebar-title">Prefer to Talk?</h3>
                 <p className="quote-page__sidebar-text">
-                  Call us directly or send an email — we're happy to discuss your project.
+                  Call us directly or send an email. We are happy to discuss your project.
                 </p>
                 <div className="quote-page__sidebar-contact">
                   <div className="quote-page__sidebar-item">

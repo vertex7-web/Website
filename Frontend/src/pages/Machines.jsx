@@ -320,8 +320,8 @@ export default function Machines() {
                 {loading
                   ? 'Fetching the latest heavy equipment availability...'
                   : searchQuery
-                  ? `No machinery found matching "${searchQuery}" in ${activeCategory === 'All' ? 'our fleet catalog' : activeCategory}.`
-                  : `There are currently no machines listed under "${activeCategory}".`}
+                    ? `No machinery found matching "${searchQuery}" in ${activeCategory === 'All' ? 'our fleet catalog' : activeCategory}.`
+                    : `There are currently no machines listed under "${activeCategory}".`}
               </p>
               {!loading && (
                 <button

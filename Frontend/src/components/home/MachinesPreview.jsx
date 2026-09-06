@@ -98,7 +98,7 @@ export default function MachinesPreview() {
         <SectionHeading
           eyebrow="Our Fleet"
           title="Heavy Equipment Ready to Deploy"
-          subtitle="Well-maintained machinery, serviced and inspected — ready for your next project."
+          subtitle="Well-maintained machinery, serviced and inspected. Ready for your next project."
         />
 
         <div className="machines-preview__grid">

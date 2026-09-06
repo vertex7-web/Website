@@ -191,8 +191,8 @@ export default function ProjectDetails() {
                   style={
                     hasMultiple
                       ? {
-                          transform: `translateX(calc(9% - ${activeIndex} * (82% + var(--space-md))))`,
-                        }
+                        transform: `translateX(calc(9% - ${activeIndex} * (82% + var(--space-md))))`,
+                      }
                       : undefined
                   }
                 >
