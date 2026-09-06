@@ -1,5 +1,6 @@
 import Container from '../ui/Container';
 import Button from '../ui/Button';
+import heroVidWeb from '../../assets/hero-vid.webm';
 import heroVid from '../../assets/hero-vid.mp4';
 import useParallax from '../../hooks/useParallax';
 import './Hero.css';
@@ -14,15 +15,19 @@ export default function Hero() {
     <section className="hero" id="hero" ref={containerRef}>
       <div className="hero__media-wrap" aria-hidden="true">
         <video
+          key={heroVidWeb}
           ref={targetRef}
           className="hero__video"
-          src={heroVid}
           autoPlay
           loop
           muted
           playsInline
+          preload="metadata"
           aria-hidden="true"
-        />
+        >
+          <source src={heroVidWeb} type="video/webm" />
+          <source src={heroVid} type="video/mp4" />
+        </video>
         <div className="hero__overlay" />
       </div>
       <Container className="hero__content" ref={textRef}>
