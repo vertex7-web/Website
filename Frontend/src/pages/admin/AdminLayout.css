@@ -891,7 +891,8 @@
   }
 
   .admin-table thead {
-    display: none; /* Hide header on mobile for card view */
+    display: none;
+    /* Hide header on mobile for card view */
   }
 
   .admin-table tbody {
@@ -1123,6 +1124,7 @@
     from {
       transform: translateY(100%);
     }
+
     to {
       transform: translateY(0);
     }

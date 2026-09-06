@@ -278,7 +278,7 @@ select {
   transform: translate3d(0, 28px, 0);
   -webkit-transform: translate3d(0, 28px, 0);
   transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -289,7 +289,7 @@ select {
   transform: translate3d(-32px, 0, 0);
   -webkit-transform: translate3d(-32px, 0, 0);
   transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -300,7 +300,7 @@ select {
   transform: translate3d(32px, 0, 0);
   -webkit-transform: translate3d(32px, 0, 0);
   transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -316,11 +316,30 @@ select {
 }
 
 /* Stagger Delays for Hierarchical Flow */
-.delay-1 { transition-delay: 90ms; animation-delay: 90ms; }
-.delay-2 { transition-delay: 180ms; animation-delay: 180ms; }
-.delay-3 { transition-delay: 270ms; animation-delay: 270ms; }
-.delay-4 { transition-delay: 360ms; animation-delay: 360ms; }
-.delay-5 { transition-delay: 450ms; animation-delay: 450ms; }
+.delay-1 {
+  transition-delay: 90ms;
+  animation-delay: 90ms;
+}
+
+.delay-2 {
+  transition-delay: 180ms;
+  animation-delay: 180ms;
+}
+
+.delay-3 {
+  transition-delay: 270ms;
+  animation-delay: 270ms;
+}
+
+.delay-4 {
+  transition-delay: 360ms;
+  animation-delay: 360ms;
+}
+
+.delay-5 {
+  transition-delay: 450ms;
+  animation-delay: 450ms;
+}
 
 /* Immediate Text Slide-Up Animation (e.g. Hero on page load) */
 @keyframes v7TextSlideUp {
@@ -328,6 +347,7 @@ select {
     opacity: 0;
     transform: translate3d(0, 30px, 0);
   }
+
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);

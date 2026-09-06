@@ -65,7 +65,7 @@ export default function About() {
       <PageHero
         eyebrow="About Us"
         title="At Vertex 7,"
-        subtitle="we don’t just rent out equipment — we provide the power, precision, and partnership that builders need to bring their visions to life."
+        subtitle="we don’t just rent out equipment. We provide the power, precision, and partnership that builders need to bring their visions to life."
         backgroundImage={heroAboutImg}
       />
 
@@ -90,7 +90,7 @@ export default function About() {
               What began as a humble trading business supplying high-quality construction
               materials, aggregates, and ready-mixed concrete through DRCJ has grown
               into a full-service group capable of providing complete construction support
-              solutions — from materials to machinery.
+              solutions, from materials to machinery.
             </p>
             <p className="about-story__text">
               With the growing demand for reliable heavy equipment and dependable
@@ -123,7 +123,7 @@ export default function About() {
                 To be a trusted and dependable partner in the construction industry
               </h3>
               <p className="about-vm__text">
-                — known for our reliability, integrity, and humble pursuit of
+                Known for our reliability, integrity, and humble pursuit of
                 excellence. </p >
               <p className="about-vm__text">
                 We envision a future where every project we serve becomes a

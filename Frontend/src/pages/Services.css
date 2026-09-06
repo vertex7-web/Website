@@ -27,6 +27,7 @@
   .services-page__item--reversed .services-page__image-wrap {
     order: 2;
   }
+
   .services-page__item--reversed .services-page__content {
     order: 1;
   }
@@ -108,6 +109,7 @@
 /* ── Responsive ──────────────────────────────────────────── */
 
 @media (max-width: 768px) {
+
   .services-page__item,
   .services-page__item--reversed {
     grid-template-columns: 1fr;

@@ -16,7 +16,7 @@ const SERVICES = [
       </svg>
     ),
     title: 'Heavy Equipment Rental',
-    description: 'Excavators, loaders, bulldozers, cranes, and more — all maintained to the highest standards and ready for deployment.',
+    description: 'Excavators, loaders, bulldozers, cranes, and more, all maintained to the highest standards and ready for deployment.',
   },
   {
     slug: 'equipment-operation',
