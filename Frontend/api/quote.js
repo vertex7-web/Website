@@ -17,14 +17,14 @@
 const CONFIG = {
   // Recipient email
   TO_EMAIL: process.env.QUOTE_TO_EMAIL || 'vertex7.her@gmail.com',
-  
+
   // Email service — choose one:
   // 'resend', 'sendgrid', 'mailgun', 'smtp'
   EMAIL_SERVICE: process.env.EMAIL_SERVICE || 'resend',
-  
+
   // API key for your chosen email service
   EMAIL_API_KEY: process.env.EMAIL_API_KEY || '',
-  
+
   // From address (must be verified with your email provider)
   FROM_EMAIL: process.env.QUOTE_FROM_EMAIL || 'quotes@vertex7.com',
 };
@@ -33,7 +33,7 @@ const CONFIG = {
 
 function validateRequest(body) {
   const errors = [];
-  
+
   if (!body.name?.trim()) errors.push('Name is required');
   if (!body.email?.trim()) {
     errors.push('Email is required');
@@ -43,7 +43,7 @@ function validateRequest(body) {
   if (!body.phone?.trim()) errors.push('Phone is required');
   if (!body.service?.trim()) errors.push('Service selection is required');
   if (!body.message?.trim()) errors.push('Message is required');
-  
+
   return errors;
 }
 
@@ -68,7 +68,7 @@ function buildEmailHtml(data) {
       <div style="background: #3C403A; padding: 24px; border-left: 4px solid #A3E72E;">
         <h2 style="color: #A3E72E; margin: 0 0 8px;">New Quote Request</h2>
         <p style="color: #A9ADA5; margin: 0; font-size: 14px;">
-          Submitted via vertex7.com
+          Submitted via vertex7.com.ph
         </p>
       </div>
       
